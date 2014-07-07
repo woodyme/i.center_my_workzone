@@ -1,0 +1,293 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\NcMonDemo.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\NcMonDemo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 NcMonDemo"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "NcMonDemo 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2013",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_NCMONDEMO_PAGE_DIALOG DIALOGEX 0, 0, 401, 331
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "监控"
+FONT 9, "宋体"
+BEGIN
+    EDITTEXT        IDC_EDIT_IPADDRSS,58,19,64,16,ES_AUTOHSCROLL
+    PUSHBUTTON      "连接",IDC_BUTTON_CONNECT,137,18,39,15
+    PUSHBUTTON      "断开连接",IDC_BUTTON_DISCONNECT,183,18,40,15
+    EDITTEXT        IDC_EDIT_MACH_COORD,58,38,132,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_ABS_COORD,127,140,108,16,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE | WS_DISABLED
+    EDITTEXT        IDC_EDIT_REL_COORD,127,162,108,16,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE | WS_DISABLED
+    LTEXT           "机床IP地址",IDC_STATIC,12,21,42,12
+    LTEXT           "机床坐标",IDC_STATIC,12,41,40,13
+    LTEXT           "绝对坐标",IDC_STATIC,75,142,40,13,NOT WS_VISIBLE
+    LTEXT           "相对坐标",IDC_STATIC,77,164,40,13,NOT WS_VISIBLE
+    GROUPBOX        "上传(发送)加工文件",IDC_STATIC,18,214,365,59
+    EDITTEXT        IDC_EDIT_FILEPATH,78,228,194,16,ES_AUTOHSCROLL
+    LTEXT           "加工文件位置",IDC_STATIC,23,230,50,13
+    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSEFILE,276,227,46,15
+    PUSHBUTTON      "发送",IDC_BUTTON_SENDFILE,327,227,46,15
+    GROUPBOX        "基本信息",IDC_STATIC,7,7,379,104
+    LTEXT           "机床报警信息",IDC_STATIC,254,19,50,12
+    EDITTEXT        IDC_EDIT_ALMINFO,310,17,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    CONTROL         "加入任务列表",IDC_CHECK_ADDTASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,24,243,197,12
+    LTEXT           "程序状态",IDC_STATIC,254,35,34,11
+    EDITTEXT        IDC_EDIT_PROG_STATE,310,34,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    CONTROL         "Progress1",IDC_PROGRESS_SENDFILE,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,17,256,363,13
+    EDITTEXT        IDC_EDIT_CURR_S,309,73,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_CURR_T,191,75,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_MACHTIME,58,75,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "实际转速S",IDC_STATIC,253,75,40,13
+    LTEXT           "装载刀具T",IDC_STATIC,137,76,40,13
+    LTEXT           "加工时间 分",IDC_STATIC,12,78,46,11
+    LTEXT           "实际进给F",IDC_STATIC,12,95,44,12
+    EDITTEXT        IDC_EDIT_CURR_F,58,93,54,16,ES_AUTOHSCROLL | WS_DISABLED
+    LISTBOX         IDC_LIST_FILE,22,138,270,73,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "文件管理",IDC_STATIC,7,113,380,211
+    LTEXT           "机台文件夹",IDC_STATIC,23,123,46,11
+    EDITTEXT        IDC_EDIT_MACH_DIR,77,120,215,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    PUSHBUTTON      "删除选中文件",IDC_BUTTON_DEL,304,159,59,14
+    PUSHBUTTON      "刷新文件列表",IDC_BUTTON_REFRESH,304,140,59,14
+    PUSHBUTTON      "下载选中文件",IDC_BUTTON_DOWNLOAD,304,197,59,14
+    LTEXT           "工件坐标系",IDC_STATIC,12,61,42,12
+    EDITTEXT        IDC_EDIT_CURR_WCOORD,58,57,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    PUSHBUTTON      "重命名选中文件",IDC_BUTTON_RENAME,304,178,59,14
+    LTEXT           "程序号O",IDC_STATIC,137,57,40,14
+    LTEXT           "主程序号O",IDC_STATIC,254,56,40,12
+    EDITTEXT        IDC_EDIT_CURR_O,191,55,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_CURR_MAINO,310,53,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    PUSHBUTTON      "获取工件加工时间履历表",IDC_BUTTON_MACHTIME_RECORD,135,
+                    93,98,14
+    EDITTEXT        IDC_EDIT_GETLASTERR,310,91,54,16,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "GetLastErr",IDC_STATIC,254,93,40,13
+    EDITTEXT        IDC_EDIT_NCFILEPATH,75,289,194,16,ES_AUTOHSCROLL
+    LTEXT           "NC文件位置",IDC_STATIC,22,291,46,10
+    PUSHBUTTON      "浏览...",IDC_BUTTON_BROWSENC,273,288,46,15
+    PUSHBUTTON      "发送",IDC_BUTTON_SENDNC,324,288,46,15
+    GROUPBOX        "上传(发送)NC文件",IDC_STATIC,18,277,364,42
+    CONTROL         "添加到任务列表",IDC_CHECK_NCADDTASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,25,303,75,14
+    CONTROL         "作为主程序",IDC_CHECK_NCASMAIN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,147,304,75,12
+END
+
+IDD_DIALOG_RENAME DIALOG DISCARDABLE  0, 0, 187, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,24,50,14
+    EDITTEXT        IDC_EDIT1,7,7,115,12,ES_AUTOHSCROLL
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "NcMonDemo Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "NcMonDemo\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2013\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "NcMonDemo.EXE\0"
+            VALUE "ProductName", "NcMonDemo 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_NCMONDEMO_PAGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 394
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 324
+    END
+
+    IDD_DIALOG_RENAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 NcMonDemo(&A)..."
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\NcMonDemo.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

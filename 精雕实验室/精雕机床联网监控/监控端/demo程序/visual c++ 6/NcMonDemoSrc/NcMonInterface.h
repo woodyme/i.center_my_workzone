@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////
+// 北京精雕科技集团有限公司数控部 
+// 局域网监控通讯模块接口
+// Copyright (C) 1994-2014 Beijing Jingdiao Co,Ltd
+// All rights reserved.
+//
 #ifndef _NC_MON_INTERFACE_H_
 #define _NC_MON_INTERFACE_H_
 
@@ -13,12 +19,23 @@
 
 #define JDMACHMON void
 
+//默认函数调用类型 __cdecl 
+#define FUNC_CALL_TYPE __cdecl  
+
+#define CSHARP_USER  //C#函数调用类型宏，暂时打开(for 清华工程训练中心)
+
+//C# 函数调用类型 __stdcall
+#ifdef CSHARP_USER
+    #undef  FUNC_CALL_TYPE
+    #define FUNC_CALL_TYPE __stdcall
+#endif
+
 //进度条回调函数
 #ifndef SetProgPosFunPtr
 typedef	void (*SetProgPosFunPtr)(void * pProgCtrl, int ProgPos);
 #endif
 
-//API for c users
+//API for c or other language users
 #ifdef __cplusplus 
 extern "C" {
 #endif
@@ -26,32 +43,32 @@ extern "C" {
 	/*-------------------------------------------------------------------------
 	[功能]:创建机床监控对象(new)
 	---------------------------------------------------------------------------*/
-	DLL_MONIO JDMACHMON *  __cdecl CreateJDMachMon();
+	DLL_MONIO JDMACHMON *  FUNC_CALL_TYPE CreateJDMachMon();
 
 	/*-------------------------------------------------------------------------
 	[功能]:销毁机床监控对象(delete)
 	---------------------------------------------------------------------------*/
-	DLL_MONIO void __cdecl DeleteJDMachMon(JDMACHMON * & JDMachMon);
+	DLL_MONIO void FUNC_CALL_TYPE DeleteJDMachMon(JDMACHMON * & JDMachMon);
 
 	/*-------------------------------------------------------------------------
 	[功能]:连接到机床
 	[输入]:servername:机床IP地址
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl ConnectJDMach(JDMACHMON *JDMachMon, const char* servername);
+	DLL_MONIO BOOL FUNC_CALL_TYPE ConnectJDMach(JDMACHMON *JDMachMon, const char* servername);
 
 	/*-------------------------------------------------------------------------
 	[功能]:与机床断开连接
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl DisConnectJDMach(JDMACHMON *JDMachMon);
+	DLL_MONIO BOOL FUNC_CALL_TYPE DisConnectJDMach(JDMACHMON *JDMachMon);
 	
 	/*-------------------------------------------------------------------------
 	[功能]:获取机床坐标
 	[输出]: MachCoord:机床坐标;  AbsCoord:绝对坐标; RelCoord:相对坐标
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetMachPos(JDMACHMON *JDMachMon, double MachCoord[3],double AbsCoord[3],double RelCoord[3]);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetMachPos(JDMACHMON *JDMachMon, double MachCoord[3],double AbsCoord[3],double RelCoord[3]);
 
 	/*-------------------------------------------------------------------------
 	[功能]:获取机床报警信息
@@ -66,7 +83,7 @@ extern "C" {
 	};
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetMachAlmInfo(JDMACHMON *JDMachMon, int * AlmInfo);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetMachAlmInfo(JDMACHMON *JDMachMon, int * AlmInfo);
 
 
 	/*-------------------------------------------------------------------------
@@ -82,7 +99,7 @@ extern "C" {
 	};
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetProgState(JDMACHMON *JDMachMon, int * ProgState);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetProgState(JDMACHMON *JDMachMon, int * ProgState);
 
 	/*-------------------------------------------------------------------------
 	[功能]:向机床发送加工文件
@@ -91,7 +108,7 @@ extern "C" {
 		   AddToTsk: 是否自动加载到任务
 		   pProgCtrl:进度条控件指针; ProgFunPtr:进度条回调函数.  如果不需要显示进度条,这两个参数传NULL
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl SendFile(JDMACHMON *JDMachMon, BOOL AddToTsk, const char * FileName, void * pProgCtrl, SetProgPosFunPtr ProgPosPtr = NULL);
+	DLL_MONIO BOOL FUNC_CALL_TYPE SendFile(JDMACHMON *JDMachMon, BOOL AddToTsk, const char * FileName, void * pProgCtrl, SetProgPosFunPtr ProgPosPtr = NULL);
 
 	/*-------------------------------------------------------------------------
 	[功能]:向机床发送NC加工文件(上传)
@@ -100,23 +117,23 @@ extern "C" {
 		   SetMainProgram: 是否添加到主程序(AddToTsk为TRUE时有效)
 	       pProgCtrl:进度条控件指针; ProgFunPtr:进度条回调函数.  如果不需要显示进度条,这两个参数传NULL
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl  SendNcFile(JDMACHMON *JDMachMon, const char * FileName, BOOL AddToTsk, BOOL SetMainProgram, 
+	DLL_MONIO BOOL FUNC_CALL_TYPE  SendNcFile(JDMACHMON *JDMachMon, const char * FileName, BOOL AddToTsk, BOOL SetMainProgram, 
 								void * pProgCtrl, SetProgPosFunPtr ProgPosPtr = NULL);
 
 	/*-------------------------------------------------------------------------
 	[功能]:是否正在向机床发送文件
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl IsSendingFile(const JDMACHMON *JDMachMon);
+	DLL_MONIO BOOL FUNC_CALL_TYPE IsSendingFile(const JDMACHMON *JDMachMon);
 
 	/*-------------------------------------------------------------------------
 	[功能]:是否正在接收文件(下载文件)
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl IsRcvingFile(const JDMACHMON *JDMachMon);
+	DLL_MONIO BOOL FUNC_CALL_TYPE IsRcvingFile(const JDMACHMON *JDMachMon);
 
 	/*-------------------------------------------------------------------------
 	[功能]:是否和机床连接
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl IsConncect(const JDMACHMON *JDMachMon) ;
+	DLL_MONIO BOOL FUNC_CALL_TYPE IsConncect(const JDMACHMON *JDMachMon) ;
 
 	/*-------------------------------------------------------------------------
 	[功能]:下载机床文件
@@ -125,7 +142,7 @@ extern "C" {
 	       pProgCtrl:进度条控件指针; ProgFunPtr:进度条回调函数.  如果不需要显示进度条,这两个参数传NULL
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL ReceiveFile(JDMACHMON *JDMachMon, const char * SrcFileName, const char * DestFileName, void * pProgCtrl, SetProgPosFunPtr ProgPosPtr = NULL);
+	DLL_MONIO BOOL FUNC_CALL_TYPE ReceiveFile(JDMACHMON *JDMachMon, const char * SrcFileName, const char * DestFileName, void * pProgCtrl, SetProgPosFunPtr ProgPosPtr = NULL);
 
 
 	/*-------------------------------------------------------------------------
@@ -139,7 +156,7 @@ extern "C" {
 			CurrMainO    : 当前主程序号
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetBasicModalInfo(JDMACHMON *JDMachMon, int &CurrWCoord, float & Feedrate, int & SpindleSpeed, int & ToolNo, float & MachTime,
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetBasicModalInfo(JDMACHMON *JDMachMon, int &CurrWCoord, float & Feedrate, int & SpindleSpeed, int & ToolNo, float & MachTime,
 				int & CurrO, int & CurrMainO);
 
 	/*-------------------------------------------------------------------------
@@ -149,7 +166,7 @@ extern "C" {
 	[输出]  FileList    : 文件列表字符串
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetMachFileList(JDMACHMON *JDMachMon, const char *DestDir, int StrBufSize, char * FileList);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetMachFileList(JDMACHMON *JDMachMon, const char *DestDir, int StrBufSize, char * FileList);
 
 	/*-------------------------------------------------------------------------
 	[功能]:删除文件
@@ -157,7 +174,7 @@ extern "C" {
 	FileName    : 机台文件夹目录下的某个文件名(或子文件夹)
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl DelMachFile(JDMACHMON *JDMachMon, const char *DestDir, const char * FileName);
+	DLL_MONIO BOOL FUNC_CALL_TYPE DelMachFile(JDMACHMON *JDMachMon, const char *DestDir, const char * FileName);
 
 	/*-------------------------------------------------------------------------
 	[功能]:重命名文件
@@ -166,7 +183,7 @@ extern "C" {
 			DestFileName    : 新的文件名
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl RenameMachFile(JDMACHMON *JDMachMon, const char *SrcFileName, const char * DestFileName);
+	DLL_MONIO BOOL FUNC_CALL_TYPE RenameMachFile(JDMACHMON *JDMachMon, const char *SrcFileName, const char * DestFileName);
 
 	/*-------------------------------------------------------------------------
 	[功能]:获取工件加工流水履历表(注：最多纪录1024个工件的加工时间流水)
@@ -176,7 +193,7 @@ extern "C" {
 			MachTime           : 各工件加工时间
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetWorkpieceMachTimeRecord(JDMACHMON *JDMachMon, int ArrSize,int & WorkpieceCount, int ProgNo[1024], float MachTime[1024]);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetWorkpieceMachTimeRecord(JDMACHMON *JDMachMon, int ArrSize,int & WorkpieceCount, int ProgNo[1024], float MachTime[1024]);
 
 
 	/*-------------------------------------------------------------------------
@@ -184,19 +201,19 @@ extern "C" {
 	[输入]: MachRcvFolder     : 机床接收文件夹(目录) full path
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl SetMachRcvFolder(JDMACHMON *JDMachMon, const char *MachRcvFolder);
+	DLL_MONIO BOOL FUNC_CALL_TYPE SetMachRcvFolder(JDMACHMON *JDMachMon, const char *MachRcvFolder);
 
 	/*-------------------------------------------------------------------------
 	[功能]:得到机床接收文件夹(目录), full path
 	[输入]: MachRcvFolder     : 机床接收文件夹(目录) full path
 	[返回]:TRUE:成功 FALSE:失败
 	---------------------------------------------------------------------------*/
-	DLL_MONIO BOOL __cdecl GetMachRcvFolder(JDMACHMON *JDMachMon, char *MachRcvFolder);
+	DLL_MONIO BOOL FUNC_CALL_TYPE GetMachRcvFolder(JDMACHMON *JDMachMon, char *MachRcvFolder);
 
 	/*-------------------------------------------------------------------------
 	[功能]:获取上个错误
 	---------------------------------------------------------------------------*/
-	DLL_MONIO UINT __cdecl GetLastErr(const JDMACHMON *JDMachMon);
+	DLL_MONIO UINT FUNC_CALL_TYPE GetLastErr(const JDMACHMON *JDMachMon);
 
 #ifdef __cplusplus 
 }
