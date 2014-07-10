@@ -63,7 +63,7 @@ CNcMonDemoDlg::CNcMonDemoDlg(CWnd* pParent /*=NULL*/)
 	: CPropertyPage(CNcMonDemoDlg::IDD)
 {
 	//{{AFX_DATA_INIT(CNcMonDemoDlg)
-	m_csIPAddress = _T("192.168.200.211");
+	m_csIPAddress;// = _T("192.168.200.211");
 	m_csMachDir = _T("F:\\En3D_Dat\\Usr\\Rcv\\");
 	//}}AFX_DATA_INIT
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);

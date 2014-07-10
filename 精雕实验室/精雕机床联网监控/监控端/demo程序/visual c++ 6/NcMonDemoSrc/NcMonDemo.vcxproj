@@ -14,7 +14,7 @@
     <SccProjectName />
     <SccLocalPath />
     <Keyword>MFCProj</Keyword>
-    <ProjectGuid>{DCD75BF8-FE9C-4CD8-9DE8-EBF8EDD6907F}</ProjectGuid>
+    <ProjectGuid>{895519C2-90A0-4AB9-9AB0-91E82DAB0282}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -45,7 +45,6 @@
     <OutDir>.\Release\</OutDir>
     <IntDir>.\Release\Obj\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>D:\Git Projects\MyWorkZone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\NcMonDemoSrc;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\Debug\</OutDir>
@@ -164,4 +163,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="NcMonDemo.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

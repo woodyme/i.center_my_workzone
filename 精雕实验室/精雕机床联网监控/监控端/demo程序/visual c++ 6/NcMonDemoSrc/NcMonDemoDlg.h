@@ -79,6 +79,8 @@ protected:
 	afx_msg void OnButtonSendNcFile();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnEnChangeEditIpaddrss();
 };
 
 //{{AFX_INSERT_LOCATION}}

@@ -51,7 +51,6 @@ BOOL CNcMonDemoApp::InitInstance()
 	for(int i = 0; i < MAX_MACH_MON_COUNT; i++)
 	{
 		dlg.AddPage(&AllPage[i]);
-
 		/*CTabCtrl* pTab = dlg.GetTabControl();
 		ASSERT (pTab);		
 		TC_ITEM ti;

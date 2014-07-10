@@ -1,38 +1,10 @@
-﻿生成启动时间为 2014/7/4 16:41:50。
+﻿生成启动时间为 2014/7/10 11:34:14。
      1>项目“D:\Git Projects\MyWorkZone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\NcMonDemoSrc\NcMonDemo.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp".\Debug\Obj\NcMonDemo.pch" /Fo".\Debug\Obj\\" /Fd".\Debug\Obj\vc110.pdb" /FR".\Debug\Obj\\" /Gd /TP /analyze- /errorReport:prompt NcMonDemoDlg.cpp
-         NcMonDemoDlg.cpp
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(229): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : 参见“sprintf”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(236): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : 参见“sprintf”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(243): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : 参见“sprintf”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(262): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(263): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(264): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(265): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(266): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(286): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(287): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(288): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(289): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : 参见“strcpy”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(412): warning C4244: “参数”: 从“ULONGLONG”转换到“short”，可能丢失数据
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(497): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(824) : 参见“_splitpath”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(539): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdlib.h(824) : 参见“_splitpath”的声明
-     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemodlg.cpp(629): warning C4244: “参数”: 从“ULONGLONG”转换到“short”，可能丢失数据
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp".\Debug\Obj\NcMonDemo.pch" /Fo".\Debug\Obj\\" /Fd".\Debug\Obj\vc110.pdb" /FR".\Debug\Obj\\" /Gd /TP /analyze- /errorReport:prompt NcMonDemo.cpp
+         NcMonDemo.cpp
+     1>d:\git projects\myworkzone\精雕实验室\精雕机床联网监控\监控端\demo程序\visual c++ 6\ncmondemosrc\ncmondemo.cpp(45): warning C4996: 'CWinApp::Enable3dControlsStatic': CWinApp::Enable3dControlsStatic is no longer needed. You should remove this call.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\atlmfc\include\afxwin.h(5364) : 参见“CWinApp::Enable3dControlsStatic”的声明
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\NcMonDemo.exe" /INCREMENTAL /NOLOGO /LIBPATH:Debug NcMonIO.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:".\Debug\NcMonDemo.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\NcMonDemo.lib" /MACHINE:X86 /SAFESEH .\Debug\Obj\NcMonDemo.res
          .\Debug\Obj\NcMonDemo.obj
@@ -45,4 +17,4 @@
 
 生成成功。
 
-已用时间 00:00:01.88
+已用时间 00:00:01.62
