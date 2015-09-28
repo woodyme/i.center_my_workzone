@@ -1,0 +1,18 @@
+V10.0
+2015-07-31: full test; 100% functional. ready to deploy.
+2015-08-02: latest version, fully encrypted. Needs test
+2015-08-19: used to install on Macbook air as CLLOW.2.One bug in .m file removed, a few issues in the .nb removed. Is Up to date
+
+v10.1
+2015-09-08: the Jeddah version | needs new Gantt template | new app notebook
+Corrected bug preventing generation of reports under certain conditions (no log file or log file empty)
+Selecting all projects in account now toggled.
+
+V10.2
+2015-09-21: corrected bugs related to non-encrypted .m files (only noticeable for CDF Player Pro users)
+Corrected typo in DeleteDirectory option.
+Notebook now has “show group opener” option saved in notebook cache.
+Closed cells area’s are now hidden.
+
+V10.2.1
+2015-09-26: now handles “elapsed durations” e10d and e25w

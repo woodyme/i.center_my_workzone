@@ -1,0 +1,2430 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     90585,       2421]
+NotebookOptionsPosition[     74495,       2017]
+NotebookOutlinePosition[     85497,       2234]
+CellTagsIndexPosition[     85454,       2231]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["INSTALLER & CONFIGURATOR", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["SCOPE", "Section"],
+
+Cell["\<\
+To install the application package and to configure the system.
+Install is done inside the user base directory
+
+Configurations consists of setting the Smartsheet access token and the root \
+directory for the system.
+Assuming a stand alone system\
+\>", "Text"],
+
+Cell["Evaluate this cell to check on the user base directory.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["INITIALIZE THE NOTEBOOK", "Section"],
+
+Cell["\<\
+When to Initialize
+\tafter you opened the notebook
+\tif you experience problems with hung interfaces
+
+Click the button below.\
+\>", "Text"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Button", "[", 
+  RowBox[{"\"\<INITIALIZE\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FrontEndTokenExecute", "[", 
+     RowBox[{
+      RowBox[{"InputNotebook", "[", "]"}], ",", 
+      "\"\<EvaluateInitialization\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"SetOptions", "[", 
+     RowBox[{
+      RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+      RowBox[{"Saveable", "\[Rule]", "False"}]}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Background", "\[Rule]", "Yellow"}]}], "]"}]], "Input",
+ CellOpen->False,
+ InitializationCell->False],
+
+Cell[BoxData[
+ ButtonBox["\<\"INITIALIZE\"\>",
+  Appearance->Automatic,
+  Background->RGBColor[1, 1, 0],
+  ButtonFunction:>(FrontEndTokenExecute[
+     InputNotebook[], "EvaluateInitialization"]; SetOptions[
+     EvaluationNotebook[], Saveable -> False]),
+  Evaluator->Automatic,
+  Method->"Queued"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["INSTALLATION", "Section"],
+
+Cell["Execute these steps in this sequence", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["INSTALL THE BOOTSTRAP (ONLY ONCE)", "Item"],
+
+Cell["CONFIGURE", "Item"],
+
+Cell["INSTALL THE SYSTEM", "Item"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["INSTALL THE BOOTSTRAP", "Subsection"],
+
+Cell["\<\
+If not done already, install the bootstrap code.
+Re-installing the code, will overwrite the previous version.
+The bootstrap code is needed for the further installation of the SMSHAR \
+application.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<LOAD THE BOOTSTRAP\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<BOOTSTRAP\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Module", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"srcdir", ",", "trgtdir", ",", "fns"}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"srcdir", "=", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+                 "\"\<SMSHARINSTALLER\>\""}], "}"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"trgtdir", "=", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+                 "\"\<SMSHARINSTALLER\>\""}], "}"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"!", 
+                RowBox[{"FileExistsQ", "[", "trgtdir", "]"}]}], ",", 
+               RowBox[{"CreateDirectory", "[", "trgtdir", "]"}]}], "]"}], ";",
+              "\[IndentingNewLine]", 
+             RowBox[{"fns", "=", 
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<SMSHARINSTALLER.m\>\"", ",", "\"\<confparams.m\>\""}], 
+               "}"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Quiet", "[", 
+                RowBox[{"DeleteFile", "[", 
+                 RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"trgtdir", ",", "#"}], "}"}], "]"}], "]"}], "]"}], 
+               "&"}], "/@", "fns"}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"CopyFile", "[", 
+                RowBox[{
+                 RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"srcdir", ",", "#"}], "}"}], "]"}], ",", 
+                 RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"trgtdir", ",", "#"}], "}"}], "]"}]}], "]"}], 
+               "&"}], "/@", "fns"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{"copy", " ", "the", " ", "Kernel", " ", "directory"}], 
+              "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"FileExistsQ", "[", 
+                RowBox[{"FileNameJoin", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"trgtdir", ",", "\"\<Kernel\>\""}], "}"}], "]"}], 
+                "]"}], ",", 
+               RowBox[{"DeleteDirectory", "[", 
+                RowBox[{
+                 RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"trgtdir", ",", "\"\<Kernel\>\""}], "}"}], "]"}], 
+                 ",", 
+                 RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}]}], 
+              "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"CopyDirectory", "[", 
+              RowBox[{
+               RowBox[{"FileNameJoin", "[", 
+                RowBox[{"{", 
+                 RowBox[{"srcdir", ",", "\"\<Kernel\>\""}], "}"}], "]"}], ",", 
+               RowBox[{"FileNameJoin", "[", 
+                RowBox[{"{", 
+                 RowBox[{"trgtdir", ",", "\"\<Kernel\>\""}], "}"}], "]"}]}], 
+              "]"}], ";", "\n", 
+             RowBox[{"(*", " ", 
+              RowBox[{"copy", " ", "APIS`"}], " ", "*)"}], "\n", 
+             RowBox[{"srcdir", "=", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<CODE\>\"",
+                  ",", "\"\<APIS\>\""}], "}"}], "]"}]}], ";", "\n", 
+             RowBox[{"trgtdir", "=", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+                 "\"\<APIS\>\""}], "}"}], "]"}]}], ";", "\n", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"FileExistsQ", "[", "trgtdir", "]"}], ",", 
+               RowBox[{"DeleteDirectory", "[", 
+                RowBox[{"trgtdir", ",", 
+                 RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}]}], 
+              "]"}], ";", "\n", 
+             RowBox[{"CopyDirectory", "[", 
+              RowBox[{"srcdir", ",", "trgtdir"}], "]"}]}]}], 
+           "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"msgBootstrap", "=", "\"\<OK\>\""}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], 
+        "\[IndentingNewLine]", "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "msgBootstrap"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+   RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"LOAD THE BOOTSTRAP\"\>", 
+     ButtonBox["\<\"BOOTSTRAP\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Module[{$CellContext`srcdir, $CellContext`trgtdir, $CellContext`fns}, \
+$CellContext`srcdir = FileNameJoin[{
+             NotebookDirectory[], "SMSHARINSTALLER"}]; $CellContext`trgtdir = 
+          FileNameJoin[{$UserBaseDirectory, "Applications", 
+             "SMSHARINSTALLER"}]; If[
+           Not[
+            FileExistsQ[$CellContext`trgtdir]], 
+           CreateDirectory[$CellContext`trgtdir]]; $CellContext`fns = {
+           "SMSHARINSTALLER.m", "confparams.m"}; Map[Quiet[
+            DeleteFile[
+             FileNameJoin[{$CellContext`trgtdir, #}]]]& , $CellContext`fns]; 
+         Map[CopyFile[
+            FileNameJoin[{$CellContext`srcdir, #}], 
+            FileNameJoin[{$CellContext`trgtdir, #}]]& , $CellContext`fns]; 
+         If[
+           FileExistsQ[
+            FileNameJoin[{$CellContext`trgtdir, "Kernel"}]], 
+           DeleteDirectory[
+            FileNameJoin[{$CellContext`trgtdir, "Kernel"}], DeleteContents -> 
+            True]]; CopyDirectory[
+           FileNameJoin[{$CellContext`srcdir, "Kernel"}], 
+           
+           FileNameJoin[{$CellContext`trgtdir, 
+             "Kernel"}]]; $CellContext`srcdir = FileNameJoin[{
+             NotebookDirectory[], "CODE", "APIS"}]; $CellContext`trgtdir = 
+          FileNameJoin[{$UserBaseDirectory, "Applications", "APIS"}]; If[
+           FileExistsQ[$CellContext`trgtdir], 
+           DeleteDirectory[$CellContext`trgtdir, DeleteContents -> True]]; 
+         CopyDirectory[$CellContext`srcdir, $CellContext`trgtdir]]; \
+$CellContext`msgBootstrap = "OK"),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`msgBootstrap, StandardForm],
+      ImageSizeCache->{86., {3., 7.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CONFIGURE", "Subsection"],
+
+Cell[TextData[{
+ "In this part two configuration parameters are set:\n\t\n\tBefore you start \
+collect these items: \n\t\n\tThe ",
+ StyleBox["access token",
+  FontWeight->"Bold"],
+ " of the Smartsheet account. \n\tThe access token can be obtained by the \
+Smartsheet administrator. \n\tIt is linked tot he account.\n\tCheck the \
+access token well.\n\t\n\tThe ",
+ StyleBox["sheet id for the Gantt Template",
+  FontWeight->"Bold"],
+ "\n\tThe Gantt Template is provided by Claymore-Lowlands.\n\tOriginally it \
+is a shared sheet.\n\tThis sheet must be \[OpenCurlyDoubleQuote]Saved as New\
+\[CloseCurlyDoubleQuote] in Smartsheet and then saved as a template.\n",
+ StyleBox["\tFetch the sheet id of this template. (You will find this in the \
+\[OpenCurlyDoubleQuote]Properties\[CloseCurlyDoubleQuote] of the sheet)\n\t\n\
+\t",
+  FontSlant->"Italic"],
+ "The ",
+ StyleBox["project folder id.\n\t",
+  FontWeight->"Bold"],
+ "You will create a folder in Smartsheet that will contain all the Gantt \
+sheets.\n\tYou name this folder as you wish.\n\t",
+ StyleBox["You have to fetch its id. (You will find this in the \
+\[OpenCurlyDoubleQuote]Properties\[CloseCurlyDoubleQuote] of the folder)",
+  FontSlant->"Italic"]
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<YOUR SMARTSHEET ACCESS TOKEN:\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "token"}], ",", "String"}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<THE GANTT SHEET TEMPLATE ID:\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "template"}], ",", "String"}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<THE PROJECT FOLDER ID:\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "projFolder"}], ",", "String"}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<CREATE THE CONFIG FILE\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<Config\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"msgConfig", "=", 
+           RowBox[{"SMSHARINSTALLER`configure", "[", 
+            RowBox[{"token", ",", "template", ",", "projFolder"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"token", ",", "template", ",", "projFolder"}], "}"}], "=", 
+           RowBox[{"{", 
+            RowBox[{"\"\<\>\"", ",", "\"\<\>\"", ",", "\"\<\>\""}], "}"}]}]}],
+          ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "msgConfig"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", " ", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", " ", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"YOUR SMARTSHEET ACCESS TOKEN:\"\>", 
+     InputFieldBox[Dynamic[$CellContext`token], String]},
+    {"\<\"THE GANTT SHEET TEMPLATE ID:\"\>", 
+     InputFieldBox[Dynamic[$CellContext`template], String]},
+    {"\<\"THE PROJECT FOLDER ID:\"\>", 
+     InputFieldBox[Dynamic[$CellContext`projFolder], String]},
+    {"\<\"CREATE THE CONFIG FILE\"\>", 
+     ButtonBox["\<\"Config\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`msgConfig = 
+        SMSHARINSTALLER`configure[$CellContext`token, $CellContext`template, \
+$CellContext`projFolder]; {$CellContext`token, $CellContext`template, \
+$CellContext`projFolder} = {"", "", ""}),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`msgConfig, StandardForm],
+      ImageSizeCache->{65., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["INSTALL THE SYSTEM", "Subsection"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["root directory",
+  FontWeight->"Bold"],
+ " for the application. \n\tThis directory will ultimately contain all \
+application resources, all project data and all project reports.\n\t",
+ StyleBox["If it doesn\[CloseCurlyQuote]t exist yet, create it first.\n\t\n",
+  FontSlant->"Italic"],
+ "\tWhen clicking the button \[OpenCurlyDoubleQuote]Set Root Dir\
+\[CloseCurlyDoubleQuote], the system will take you to navigate in the file \
+browser.\n\tThis can take a few seconds.\n\tThen navigate to the chosen root \
+directory and select it.\n\t\n\tIf you choose the wrong directory, re-run the \
+\[OpenCurlyDoubleQuote]Set Root Dir\[CloseCurlyDoubleQuote] procedure.\n\t\n\t\
+When the root has been set, execute the \[OpenCurlyDoubleQuote]STRUCTURE\
+\[CloseCurlyDoubleQuote]  procedure: this will generate the folder structure \
+for the root.\n\t\n\tDefining a new root and structure will\n\t\tmodify your \
+configuration to the new root\n\t\twill not destroy the previous root and its \
+content\n\t\tmake the previous root and all of its content ",
+ StyleBox["inaccessible",
+  FontWeight->"Bold"],
+ " to the system.\n\t\t\n\tDefining the same root and structure twice will\n\t\
+\treset the config file to the old root\n\t\tnot destroy its content\n\t\t\
+make the previous root and all its content ",
+ StyleBox["accessible",
+  FontWeight->"Bold"],
+ " to the system."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<SET THE ROOT DIRECTORY\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<Set Root Dir\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"root", "=", 
+           RowBox[{"SystemDialogInput", "[", "\"\<Directory\>\"", "]"}]}], 
+          ";", "\n", 
+          RowBox[{
+          "msgStructure", "=", "\"\<Need to build the structure\>\""}]}], ",",
+          "\n", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}]}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<SELECTED ROOT DIR \[Rule] \>\"", ",", 
+       RowBox[{"Dynamic", "@", "root"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     
+     RowBox[{"{", 
+      RowBox[{"\"\<CREATE THE FOLDER STRUCTURE\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<STRUCTURE\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"msgStructure", "=", 
+           RowBox[{"SMSHARINSTALLER`buildSystem", "[", 
+            RowBox[{
+             RowBox[{"NotebookDirectory", "[", "]"}], ",", "root"}], 
+            "]"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "msgStructure"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", " ", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", " ", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"SET THE ROOT DIRECTORY\"\>", 
+     ButtonBox["\<\"Set Root Dir\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>($CellContext`root = 
+        SystemDialogInput["Directory"]; $CellContext`msgStructure = 
+        "Need to build the structure"),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"SELECTED ROOT DIR \[Rule] \"\>", 
+     DynamicBox[ToBoxes[$CellContext`root, StandardForm],
+      ImageSizeCache->{29., {0., 7.}}]},
+    {"\<\"CREATE THE FOLDER STRUCTURE\"\>", 
+     ButtonBox["\<\"STRUCTURE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`msgStructure = 
+        SMSHARINSTALLER`buildSystem[
+          NotebookDirectory[], $CellContext`root]),
+      Evaluator->Automatic,
+      Method->"Preemptive"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`msgStructure, StandardForm],
+      ImageSizeCache->{86., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]],
+
+Cell["Now Install the application code and check it.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<INSTALL THE APP CODE\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<INSTALL APP CODE\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"err", ",", "checkmsg"}], "}"}], "=", 
+           RowBox[{"SMSHARINSTALLER`installCode", "[", "]"}]}]}], ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\n", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<CHECK APP\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CHECK APP\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"checkmsg", "=", 
+           RowBox[{"StringJoin", "[", "\[IndentingNewLine]", 
+            RowBox[{
+            "SMSHARINSTALLER`sayHelloFromSMSHARINSTALLER", ",", 
+             "\[IndentingNewLine]", "SMSHARV10`sayHelloTFromSMSHARV10"}], 
+            "]"}]}]}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "checkmsg"}]}], "}"}]}], "\[IndentingNewLine]",
+     "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+   RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"INSTALL THE APP CODE\"\>", 
+     ButtonBox["\<\"INSTALL APP CODE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; {$CellContext`err, $CellContext`checkmsg} = 
+        SMSHARINSTALLER`installCode[]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"CHECK APP\"\>", 
+     ButtonBox["\<\"CHECK APP\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; 
+       Needs["SMSHARV10`"]; $CellContext`checkmsg = 
+        StringJoin[
+         SMSHARINSTALLER`sayHelloFromSMSHARINSTALLER, 
+          SMSHARV10`sayHelloTFromSMSHARV10]),
+      Evaluator->Automatic,
+      Method->"Preemptive"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`checkmsg, StandardForm],
+      ImageSizeCache->{58., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["CHECK CONFIG", "Section"],
+
+Cell[TextData[{
+ "The configuration can be checked here.\nThe availability of the application \
+code will be checked.\nThe major config parameters will be displayed.\n\nOnce \
+done, clear the results for safety.\n\n",
+ StyleBox["DO THIS BEFORE START RUNNING THE SYSTEM",
+  FontColor->RGBColor[1, 0, 0]]
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<CHECK CONFIG\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CHECK\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+          "str1", "=", "SMSHARINSTALLER`sayHelloFromSMSHARINSTALLER"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"err", ",", "str2"}], "}"}], "=", 
+           "SMSHARV10`sayHelloTFromSMSHARV10"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"str3", "=", "SMSHARV10`checkConfig"}], ";", "\n", 
+          RowBox[{"checkResult", "=", 
+           RowBox[{"StringJoin", "[", 
+            RowBox[{"str1", ",", "str2", ",", "str3"}], "]"}]}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Method", "->", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "checkResult"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<CLEAR\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CL\>\"", ",", 
+         RowBox[{"checkResult", "=", "\"\<\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+   RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"CHECK CONFIG\"\>", 
+     ButtonBox["\<\"CHECK\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; 
+       Needs["SMSHARV10`"]; $CellContext`str1 = 
+        SMSHARINSTALLER`sayHelloFromSMSHARINSTALLER; {$CellContext`err, \
+$CellContext`str2} = SMSHARV10`sayHelloTFromSMSHARV10; $CellContext`str3 = 
+        SMSHARV10`checkConfig; $CellContext`checkResult = 
+        StringJoin[$CellContext`str1, $CellContext`str2, $CellContext`str3]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`checkResult, StandardForm],
+      ImageSizeCache->{79., {0., 8.}}]},
+    {"\<\"CLEAR\"\>", 
+     ButtonBox["\<\"CL\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>($CellContext`checkResult = ""),
+      Evaluator->Automatic,
+      Method->"Preemptive"]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ACCOUNTS", "Section"],
+
+Cell[TextData[{
+ StyleBox["For this section to work, the INSTALLATION must be completed.",
+  FontWeight->"Bold"],
+ "\n\nThis section provides the function for managing accounts.\nAn account \
+is a set of projects that can be considered as a portfolio.\n\nPortfolio \
+reporting will be done on an account basis.\n\nThe functions allow to\n\t\
+create an account\n\tarchive an account\n\nWe strongly advise to use these \
+functions instead of attempting to create and move items by hand."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["CREATE  ACCOUNT", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<CLEAR\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CL\>\"", ",", 
+         RowBox[{
+          RowBox[{"acc", "=", "\"\<\>\""}], ";", 
+          RowBox[{"accCmsg", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<NEW ACOUNT NAME\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "acc"}], ",", "String"}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<CREATE NEW ACCOUNT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CREATE\>\"", ",", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"accCmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`createAcc", "[", "acc", "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "accCmsg"}]}], "}"}]}], "\[IndentingNewLine]", 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"CLEAR\"\>", 
+     ButtonBox["\<\"CL\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>($CellContext`acc = ""; $CellContext`accCmsg = ""),
+      Evaluator->Automatic,
+      Method->"Preemptive"]},
+    {"\<\"NEW ACOUNT NAME\"\>", 
+     InputFieldBox[Dynamic[$CellContext`acc], String]},
+    {"\<\"CREATE NEW ACCOUNT\"\>", 
+     ButtonBox["\<\"CREATE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accCmsg = 
+        SMSHARINSTALLER`createAcc[$CellContext`acc]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`accCmsg, StandardForm],
+      ImageSizeCache->{50., {3., 7.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["LIST ACCOUNTS", "Subsection"],
+
+Cell["This generates the list of all active accounts.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<LIST\>\"", ",", 
+        RowBox[{
+         RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+         RowBox[{"accLmsg", "=", 
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}]}]}], ",", 
+        RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"Dynamic", "@", "accLmsg"}], "}"}]}], "\[IndentingNewLine]", 
+    "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", " ", 
+   RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     ButtonBox["\<\"LIST\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accLmsg = 
+        SMSHARINSTALLER`listAccounts[]),
+      Evaluator->Automatic,
+      Method->"Preemptive"]},
+    {
+     DynamicBox[ToBoxes[$CellContext`accLmsg, StandardForm],
+      ImageSizeCache->{350., {122., 128.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ARCHIVE ACCOUNT", "Subsection"],
+
+Cell["\<\
+This archives a complete account, with all its projects.
+\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ARCHIVE ACCOUNT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<ARCHIVE\>\"", ",", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"accAmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`archiveAcc", "[", "acc", "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "accAmsg"}]}], "}"}]}], "\[IndentingNewLine]", 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"ARCHIVE ACCOUNT\"\>", 
+     ButtonBox["\<\"ARCHIVE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accAmsg = 
+        SMSHARINSTALLER`archiveAcc[$CellContext`acc]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`accAmsg, StandardForm],
+      ImageSizeCache->{50., {3., 7.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["PROJECTS", "Section"],
+
+Cell[TextData[{
+ StyleBox["For this section to work, the INSTALLATION must be completed.",
+  FontWeight->"Bold"],
+ "\n\nThis section provides the function for creating projects.\nA project \
+must always be allocated to an account (or portfolio).\n\n",
+ StyleBox["Portfolio",
+  FontWeight->"Bold"],
+ " reporting will be done on an account basis.\n\nThe functions allow to\n\n\t\
+create a project\n\tarchive a project\n\tmove a project to another account\n\t\
+rename a project\n\t\nWe strongly advise to use these functions instead of \
+attempting to create and move items by hand."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["CREATE PROJECT", "Subsection"],
+
+Cell[TextData[{
+ "This will create the folder structures for a new project.\nThis must be \
+done before one can start reporting on the project.\n\n",
+ StyleBox["This also handles the Smartsheet side.",
+  FontVariations->{"Underline"->True}],
+ "\n",
+ StyleBox["A new empty Gantt ",
+  FontWeight->"Bold"],
+ "will be created from the template.\nIt will be placed i",
+ StyleBox["n the Project Folder",
+  FontWeight->"Bold"],
+ " set up when Installing and Configuring the system.\nThis Gantt will be \
+named \[OpenCurlyDoubleQuote]",
+ StyleBox["Gantt",
+  FontWeight->"Bold"],
+ ".",
+ StyleBox["accountName.projectName",
+  FontWeight->"Bold"],
+ "\[CloseCurlyDoubleQuote].\nIts ",
+ StyleBox["unique id",
+  FontWeight->"Bold"],
+ " will be registered and saved.\nIf the name of the Gantt is changed (",
+ StyleBox["we strongly advise ",
+  FontSlant->"Italic"],
+ StyleBox["NOT",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ StyleBox[" to do so",
+  FontSlant->"Italic"],
+ "), its unique id will be kept to its original value.\nGantt sheets are \
+accessed through their unique ids.\n "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}], ";", "\n", 
+          RowBox[{"proj", "=", "\"\<\>\""}], ";", "\n", 
+          RowBox[{"accPmsg", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<NEW PROJECT NAME\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "proj"}], ",", "String"}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<CREATE NEW PROJECT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<CREATE\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"accPmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`createProj", "[", 
+            RowBox[{"acc", ",", "proj"}], "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "accPmsg"}]}], "}"}]}], "\[IndentingNewLine]", 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; 
+       SMSHARINSTALLER`listAccounts[]; $CellContext`proj = 
+        ""; $CellContext`accPmsg = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"NEW PROJECT NAME\"\>", 
+     InputFieldBox[Dynamic[$CellContext`proj], String]},
+    {"\<\"CREATE NEW PROJECT\"\>", 
+     ButtonBox["\<\"CREATE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accPmsg = 
+        SMSHARINSTALLER`createProj[$CellContext`acc, $CellContext`proj]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`accPmsg, StandardForm],
+      ImageSizeCache->{50., {3., 7.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["LIST PROJECTS", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"acc", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<PROJECTS\>\"", ",", 
+       RowBox[{"Pane", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", 
+          RowBox[{"Grid", "[", 
+           RowBox[{
+            RowBox[{"Partition", "[", 
+             RowBox[{
+              RowBox[{"SMSHARINSTALLER`projectList", "[", "acc", "]"}], ",", 
+              "1"}], "]"}], ",", 
+            RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+            RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+            RowBox[{"Alignment", "\[Rule]", 
+             RowBox[{"{", "Left", "}"}]}]}], "]"}]}], ",", 
+         RowBox[{"Scrollbars", "\[Rule]", "Automatic"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"350", ",", "250"}], "}"}]}]}], "]"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; $CellContext`acc = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"PROJECTS\"\>", 
+     PaneBox[
+      DynamicBox[ToBoxes[
+        Grid[
+         Partition[
+          SMSHARINSTALLER`projectList[$CellContext`acc], 1], Frame -> All, 
+         FrameStyle -> Gray, Alignment -> {Left}], StandardForm],
+       ImageSizeCache->{68., {23.3544921875, 28.6455078125}}],
+      ImageSize->{350, 250},
+      Scrollbars->Automatic]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ARCHIVE PROJECT", "Subsection"],
+
+Cell["\<\
+This will archive a project both data and last report.
+The reference to its Gantt will be erased.
+It will not delete the Gantt sheet.
+This must be done in Smartsheet.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", 
+         RowBox[{
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}], ";", "\n", 
+          RowBox[{"accPAmsg", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<PROJECT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "proj"}], ",", 
+          RowBox[{"SMSHARINSTALLER`projectList", "[", "acc", "]"}]}], 
+         "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ARCHIVE THE PROJECT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<ARCHIVE\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"accPAmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`archiveProj", "[", 
+            RowBox[{"acc", ",", "proj"}], "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "accPAmsg"}]}], "}"}]}], "\[IndentingNewLine]",
+     "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       SMSHARINSTALLER`listAccounts[]; $CellContext`accPAmsg = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"PROJECT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`proj], 
+        SMSHARINSTALLER`projectList[$CellContext`acc]], StandardForm],
+      ImageSizeCache->{104., {6., 17.}}]},
+    {"\<\"ARCHIVE THE PROJECT\"\>", 
+     ButtonBox["\<\"ARCHIVE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accPAmsg = 
+        SMSHARINSTALLER`archiveProj[$CellContext`acc, $CellContext`proj]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`accPAmsg, StandardForm],
+      ImageSizeCache->{58., {3., 7.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RENAME PROJECT", "Subsection"],
+
+Cell[TextData[{
+ "This will rename the project in the DPC file structure.\nIt will not change \
+the name of the Gantt sheet. \nIf you want this to happen, you will have to \
+do it in Smartsheet.\n\n",
+ StyleBox["Remember",
+  FontWeight->"Bold"],
+ ": the sheet\[CloseCurlyQuote]s unique id remains to its original value.\n\
+The project will stay in the account"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}], ";", "\n", 
+          RowBox[{"newProj", "=", "\"\<\>\""}], ";", "\n", 
+          RowBox[{"projREmsg", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<PROJECT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "proj"}], ",", 
+          RowBox[{"SMSHARINSTALLER`projectList", "[", "acc", "]"}]}], 
+         "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<NEW PROJECT NAME\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "newProj"}], ",", "String"}], "]"}]}], "}"}],
+      ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RENAME THE PROJECT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<RENAME\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"projREmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`renameProj", "[", 
+            RowBox[{"acc", ",", "proj", ",", "newProj"}], "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "projREmsg"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       SMSHARINSTALLER`listAccounts[]; $CellContext`newProj = 
+        ""; $CellContext`projREmsg = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"PROJECT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`proj], 
+        SMSHARINSTALLER`projectList[$CellContext`acc]], StandardForm],
+      ImageSizeCache->{104., {6., 17.}}]},
+    {"\<\"NEW PROJECT NAME\"\>", 
+     InputFieldBox[Dynamic[$CellContext`newProj], String]},
+    {"\<\"RENAME THE PROJECT\"\>", 
+     ButtonBox["\<\"RENAME\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`projREmsg = 
+        SMSHARINSTALLER`renameProj[$CellContext`acc, $CellContext`proj, \
+$CellContext`newProj]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`projREmsg, StandardForm],
+      ImageSizeCache->{65., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["MOVE PROJECT", "Subsection"],
+
+Cell[TextData[{
+ "This will move a complete project ",
+ StyleBox["from one account to another account",
+  FontWeight->"Bold"],
+ ", provided that the project name is not in use in the target account.\nIf \
+this is the case, an error will be issued.\n\nThis doesn\[CloseCurlyQuote]t \
+affect the Gantt\[CloseCurlyQuote]s name or the Gantt\[CloseCurlyQuote]s \
+unique id.\nThe Gantt\[CloseCurlyQuote]s name should be changed in Smartsheet."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}], ";", "\n", 
+          RowBox[{"proj", "=", "\"\<\>\""}], ";", 
+          RowBox[{"projMOVmsg", "=", "\"\<\>\""}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<SOURCE ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "accsrc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<TARGET ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acctrgt"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<PROJECT NAME\>\"", ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", "proj"}], ",", "String"}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<MOVE THE PROJECT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<MOVE\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"projMOVmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`moveProj", "[", 
+            RowBox[{"accsrc", ",", "proj", ",", "acctrgt"}], "]"}]}]}], ",", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RESULT \[Rule]\>\"", ",", 
+       RowBox[{"Dynamic", "@", "projMOVmsg"}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       SMSHARINSTALLER`listAccounts[]; $CellContext`proj = 
+        ""; $CellContext`projMOVmsg = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"SOURCE ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`accsrc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"TARGET ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acctrgt], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"PROJECT NAME\"\>", 
+     InputFieldBox[Dynamic[$CellContext`proj], String]},
+    {"\<\"MOVE THE PROJECT\"\>", 
+     ButtonBox["\<\"MOVE\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`projMOVmsg = 
+        SMSHARINSTALLER`moveProj[$CellContext`accsrc, $CellContext`proj, \
+$CellContext`acctrgt]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"RESULT \[Rule]\"\>", 
+     DynamicBox[ToBoxes[$CellContext`projMOVmsg, StandardForm],
+      ImageSizeCache->{72., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RUNNING THE SYSTEM", "Title"],
+
+Cell[TextData[{
+ "First select a single project, a subset of a portfolio (account) or a \
+complete account.\nYou can select projects across many accounts.\n\nThen \
+launch the reporting engine on the selection.\n\n",
+ StyleBox["REMEMBER",
+  FontWeight->"Bold"],
+ ": the status date is today. It cannot be changed."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["GENERATE THE REPORTS", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["SELECT THE PROJECTS", "Subsubsection"],
+
+Cell["\<\
+You will first select the project or projects for which you wnat to generate \
+reports.
+Projects can be selected for many accounts
+
+All projects of any account can be selected (or de-selected) by clicking the \
+account name.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<SETUP SELECTION\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<SETUP\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"accLmsg", "=", 
+           RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}]}], ";", "\n", 
+          RowBox[{"selgrid", "=", 
+           RowBox[{"Grid", "[", "\n", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Tooltip", "[", 
+                  RowBox[{
+                   RowBox[{"Button", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{
+                    RowBox[{"selectedProj", "[", "#", "]"}], "=", 
+                    RowBox[{"SMSHARINSTALLER`projectList", "[", "#", "]"}]}], 
+                    ",", 
+                    RowBox[{"Appearance", "\[Rule]", "None"}]}], "]"}], ",", 
+                   "\"\<Click to select every project in account\>\"", ",", 
+                   RowBox[{"TooltipStyle", "\[Rule]", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", "Bold"}], "]"}]}]}], "]"}], ",", "\n", 
+                 RowBox[{"CheckboxBar", "[", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "@", 
+                    RowBox[{"selectedProj", "[", "#", "]"}]}], ",", 
+                   RowBox[{"SMSHARINSTALLER`projectList", "[", "#", "]"}], 
+                   ",", 
+                   RowBox[{"Appearance", "\[Rule]", "\"\<Row\>\""}]}], 
+                  "]"}]}], "}"}], "&"}], "/@", 
+              "SMSHARINSTALLER`activeAccounts"}], ",", "\n", 
+             RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+             RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+             RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}]}]}], ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<SELECT PROJECTS\>\"", ",", 
+       RowBox[{"Dynamic", "@", "selgrid"}]}], "}"}]}], "\n", "}"}], ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+   RowBox[{"FrameStyle", "\[Rule]", "Gray"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"SETUP SELECTION\"\>", 
+     ButtonBox["\<\"SETUP\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARINSTALLER`"]; $CellContext`accLmsg = 
+        SMSHARINSTALLER`listAccounts[]; $CellContext`selgrid = Grid[
+          Map[{
+            Tooltip[
+             
+             Button[#, $CellContext`selectedProj[#] = 
+              SMSHARINSTALLER`projectList[#], Appearance -> None], 
+             "Click to select every project in account", TooltipStyle -> 
+             Directive[Red, Bold]], 
+            CheckboxBar[
+             Dynamic[
+              $CellContext`selectedProj[#]], 
+             SMSHARINSTALLER`projectList[#], Appearance -> "Row"]}& , 
+           SMSHARINSTALLER`activeAccounts], Frame -> All, FrameStyle -> Gray, 
+          Alignment -> Left]),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"SELECT PROJECTS\"\>", 
+     DynamicBox[ToBoxes[$CellContext`selgrid, StandardForm],
+      ImageSizeCache->{937., {83.8544921875, 89.1455078125}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["GENERATE REPORTS ON SELECTED PROJECTS", "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"monmsg", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SMSHARV10`monitor", "=", 
+    RowBox[{"{", 
+     RowBox[{"{", "\"\<\>\"", "}"}], "}"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\n", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESCH\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", "\n", 
+          RowBox[{"joblist", "=", 
+           RowBox[{"DeleteCases", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"acc", ",", "#"}], "}"}], "&"}], "/@", 
+                  RowBox[{"selectedProj", "[", "acc", "]"}]}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"acc", ",", "SMSHARINSTALLER`activeAccounts"}], 
+                  "}"}]}], "]"}], ",", "1"}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"p_", "/;", 
+              RowBox[{"Or", "[", 
+               RowBox[{
+                RowBox[{"MatchQ", "[", 
+                 RowBox[{"p", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"__", ",", "\"\<*\>\""}], "}"}]}], "]"}], ",", 
+                RowBox[{"MatchQ", "[", 
+                 RowBox[{"p", ",", 
+                  RowBox[{"{", "}"}]}], "]"}], ",", 
+                RowBox[{
+                 RowBox[{"Head", "@", "p"}], "=!=", "List"}]}], "]"}]}]}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"monmsg", "=", "joblist"}], ";", "\n", 
+          RowBox[{"SMSHARV10`monitor", "=", 
+           RowBox[{"{", 
+            RowBox[{"{", "\"\<\>\"", "}"}], "}"}]}]}], ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}]}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"Pane", "[", 
+         RowBox[{
+          RowBox[{"Grid", "[", "monmsg", "]"}], ",", 
+          RowBox[{"Scrollbars", "\[Rule]", "Automatic"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"150", ",", "250"}], "}"}]}]}], "]"}]}], ",", "\n", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"Framed", "[", 
+         RowBox[{"Pane", "[", 
+          RowBox[{
+           RowBox[{"Grid", "[", 
+            RowBox[{"SMSHARV10`monitor", ",", 
+             RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+             RowBox[{"FrameStyle", "\[Rule]", "Gray"}], ",", 
+             RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}], ",", 
+           RowBox[{"Scrollbars", "\[Rule]", "Automatic"}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"350", ",", "250"}], "}"}]}]}], "]"}], "]"}]}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<GENERATE THE REPORTS\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REPORTS\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"SMSHARV10`monitor", "=", 
+           RowBox[{"{", 
+            RowBox[{"{", "}"}], "}"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"SMSHARV10`smsharRun", "[", 
+             RowBox[{"#", ",", "3"}], "]"}], "&"}], "/@", "joblist"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"monmsg", "=", 
+           RowBox[{"{", 
+            RowBox[{"{", "\"\<Waiting\>\"", "}"}], "}"}]}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Method", "->", "\"\<Queued\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], 
+        "\[IndentingNewLine]", "]"}]}], "}"}]}], "\n", "}"}], ",", 
+   RowBox[{"Frame", "->", "All"}], ",", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Left", ",", "Top"}], "}"}]}]}], "]"}]}], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH\"\>", 
+     ButtonBox["\<\"REFRESCH\"\>",
+      Appearance->Automatic,
+      ButtonFunction:>(Needs["SMSHARV10`"]; $CellContext`joblist = DeleteCases[
+          Flatten[
+           Table[
+            Map[{$CellContext`acc, #}& , 
+             $CellContext`selectedProj[$CellContext`acc]], {$CellContext`acc, 
+             SMSHARINSTALLER`activeAccounts}], 1], 
+          Condition[
+           Pattern[$CellContext`p, 
+            Blank[]], 
+           Or[
+            MatchQ[$CellContext`p, {
+              BlankSequence[], "*"}], 
+            MatchQ[$CellContext`p, {}], Head[$CellContext`p] =!= 
+            List]]]; $CellContext`monmsg = $CellContext`joblist; 
+       SMSHARV10`monitor = {{""}}),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {
+     DynamicBox[ToBoxes[
+       Pane[
+        Grid[$CellContext`monmsg], Scrollbars -> Automatic, 
+        ImageSize -> {150, 250}], StandardForm],
+      ImageSizeCache->{150., {122., 128.}}], 
+     DynamicBox[ToBoxes[
+       Framed[
+        Pane[
+         Grid[
+         SMSHARV10`monitor, Frame -> All, FrameStyle -> Gray, Alignment -> 
+          Left], Scrollbars -> Automatic, ImageSize -> {350, 250}]], 
+       StandardForm],
+      ImageSizeCache->{360., {127., 133.}}]},
+    {"\<\"GENERATE THE REPORTS\"\>", 
+     ButtonBox["\<\"REPORTS\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARV10`"]; SMSHARV10`monitor = {{}}; 
+       Map[SMSHARV10`smsharRun[#, 
+          3]& , $CellContext`joblist]; $CellContext`monmsg = {{"Waiting"}}),
+      Evaluator->Automatic,
+      Method->"Queued"]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Top}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["LOOK UP REPORTS", "Subsection"],
+
+Cell["\<\
+The report of the selected project will open in the Web browser.
+The most recent report will open.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", "\n", 
+          
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}], ";", "\n", 
+          RowBox[{"newProj", "=", "\"\<\>\""}], ";", "\n", 
+          RowBox[{"projREmsg", "=", "\"\<\>\""}]}], ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", "\n", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<PROJECT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "proj"}], ",", 
+          RowBox[{"SMSHARINSTALLER`projectList", "[", "acc", "]"}]}], 
+         "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<VIEW PROJECT REPORT\>\"", ",", "\n", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<LOOKUP\>\"", ",", "\n", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", "\n", 
+          RowBox[{"SystemOpen", "[", 
+           RowBox[{"FileNameJoin", "[", 
+            RowBox[{"{", 
+             RowBox[{
+             "SMSHARV10CONFIG`SMSHARROOT", ",", "\"\<Public\>\"", ",", "acc", 
+              ",", "proj", ",", "\"\<MC.html\>\""}], "}"}], "]"}], "]"}]}], 
+         ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", "\n", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; 
+       SMSHARINSTALLER`listAccounts[]; $CellContext`newProj = 
+        ""; $CellContext`projREmsg = ""),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"PROJECT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`proj], 
+        SMSHARINSTALLER`projectList[$CellContext`acc]], StandardForm],
+      ImageSizeCache->{104., {6., 17.}}]},
+    {"\<\"VIEW PROJECT REPORT\"\>", 
+     ButtonBox["\<\"LOOKUP\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARV10`"]; SystemOpen[
+         FileNameJoin[{
+          SMSHARV10CONFIG`SMSHARROOT, 
+           "Public", $CellContext`acc, $CellContext`proj, "MC.html"}]]),
+      Evaluator->Automatic,
+      Method->"Queued"]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["PORTFOLIO REPORT", "Subsection"],
+
+Cell["\<\
+For a selected account (which assimilates to a portfolio), the portfolio \
+report will be generated.
+All projects in the account will be handled.
+Think about archiving reports that are finished.
+
+The report will display as a notebook.
+At the same time a CDF version will be saved in folder  ~/Public/Account/\
+\[OpenCurlyDoubleQuote]CDF FILES\[CloseCurlyDoubleQuote].
+One can edit the portfolio report notebook and add some comments.
+Then the notebook can be saved as a separated file or replace the already \
+saved CDF version.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<REFRESH ACC LIST\>\"", ",", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<REFRESH\>\"", ",", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARINSTALLER`\>\"", "]"}], ";", 
+          RowBox[{"SMSHARINSTALLER`listAccounts", "[", "]"}]}], ",", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}]}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<ACOUNT NAME\>\"", ",", 
+       RowBox[{"Dynamic", "@", 
+        RowBox[{"PopupMenu", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", "acc"}], ",", 
+          "SMSHARINSTALLER`activeAccounts"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<MAKE PORTFOLIO REPORT\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<PFR\>\"", ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Needs", "[", "\"\<SMSHARV10`\>\"", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"activity", "=", 
+           RowBox[{"ProgressIndicator", "[", 
+            RowBox[{"Appearance", "\[Rule]", "\"\<Percolate\>\""}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"SMSHARV10`makePFReport", "[", "acc", "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"activity", "=", "\"\<THANK YOU\>\""}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}], ",", "\n", 
+         RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}]}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<BE PATIENT\>\"", ",", 
+       RowBox[{"Dynamic", "@", "activity"}]}], "}"}]}], "\[IndentingNewLine]",
+     "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Frame", "->", "All"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FrameStyle", "->", "Gray"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}]], "Code",
+ CellOpen->False],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"REFRESH ACC LIST\"\>", 
+     ButtonBox["\<\"REFRESH\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(Needs["SMSHARINSTALLER`"]; 
+       SMSHARINSTALLER`listAccounts[]),
+      Evaluator->Automatic,
+      Method->"Preemptive"]},
+    {"\<\"ACOUNT NAME\"\>", 
+     DynamicBox[ToBoxes[
+       PopupMenu[
+        Dynamic[$CellContext`acc], SMSHARINSTALLER`activeAccounts], 
+       StandardForm],
+      ImageSizeCache->{83., {6., 17.}}]},
+    {"\<\"MAKE PORTFOLIO REPORT\"\>", 
+     ButtonBox["\<\"PFR\"\>",
+      Appearance->"Palette",
+      ButtonFunction:>(
+       Needs["SMSHARV10`"]; $CellContext`activity = 
+        ProgressIndicator[Appearance -> "Percolate"]; 
+       SMSHARV10`makePFReport[$CellContext`acc]; $CellContext`activity = 
+        "THANK YOU"),
+      Evaluator->Automatic,
+      Method->"Queued"]},
+    {"\<\"BE PATIENT\"\>", 
+     DynamicBox[ToBoxes[$CellContext`activity, StandardForm],
+      ImageSizeCache->{58., {3., 8.}}]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0.5],
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+},
+Saveable->True,
+WindowSize->{1271, 977},
+WindowMargins->{{150, Automatic}, {Automatic, 0}},
+ShowGroupOpener->True,
+ShowClosedCellArea->False,
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, \
+2015)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    CellGroupData[{
+      Cell[
+       StyleData["Chapter"], CellMargins -> {{27, Inherited}, {10, 15}}, 
+       StyleKeyMapping -> {
+        "Tab" -> "Subchapter", "Backspace" -> 
+         "Title", $CellContext`KeyEvent[
+          "Tab", $CellContext`Modifiers -> {$CellContext`Shift}] -> "Title"}, 
+       CellGroupingRules -> {"SectionGrouping", 10}, PageBreakBelow -> False, 
+       LineSpacing -> {1, 4}, LanguageCategory -> "NaturalLanguage", 
+       CounterIncrements -> "Chapter", 
+       CounterAssignments -> {{"Subchapter", 0}, {"Section", 0}, {
+         "Equation", 0}, {"Figure", 0}, {"Subsubtitle", 0}, {"Item", 0}, {
+         "Subitem", 0}, {"Subsubitem", 0}, {"ItemNumbered", 0}, {
+         "SubitemNumbered", 0}, {"SubsubitemNumbered", 0}}, MenuSortingValue -> 
+       1150, MenuCommandKey -> "2", FontFamily -> "Gill Sans", FontSize -> 24,
+        FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+       RGBColor[
+        0.13725490196078433`, 0.3137254901960784, 0.19607843137254902`]], 
+      Cell[
+       StyleData["Chapter", "Presentation"], 
+       CellMargins -> {{67, Inherited}, {10, 15}}, LineSpacing -> {1, 16}, 
+       FontSize -> 48], 
+      Cell[
+       StyleData["Chapter", "SlideShow"], 
+       CellMargins -> {{
+         0.135 FrontEnd`AbsoluteCurrentValue[{WindowSize, 1}], 0.04 
+          FrontEnd`AbsoluteCurrentValue[{WindowSize, 1}]}, {10, 15}}, 
+       LineSpacing -> {1, 2}], 
+      Cell[
+       StyleData["Chapter", "Condensed"], CellMargins -> {{18, 10}, {5, 7}}, 
+       FontSize -> 14], 
+      Cell[
+       StyleData["Chapter", "Printout"], 
+       CellMargins -> {{10, Inherited}, {10, 15}}], 
+      Cell[
+       StyleData["Chapter", "PrintoutGray"], 
+       CellMargins -> {{10, Inherited}, {10, 15}}]}, Open]], 
+   Cell[
+    StyleData["Title"], CellFrame -> {{0, 0}, {0, 0}}, CellFrameColor -> 
+    RGBColor[0.4, 0.8, 0.6], TextAlignment -> Left, TextJustification -> 0., 
+    FontFamily -> "Gill Sans", FontSize -> 24, FontWeight -> "Plain", 
+    FontSlant -> "Plain", FontColor -> RGBColor[0., 0.4, 0.2], Background -> 
+    RGBColor[0.88, 1, 0.88]], 
+   Cell[
+    StyleData["Subtitle"], TextAlignment -> Center, TextJustification -> 0., 
+    FontFamily -> "Verdana", FontSize -> 14, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Subsubtitle"], TextAlignment -> Left, TextJustification -> 0., 
+    FontFamily -> "Verdana Italic", FontSize -> 10, FontWeight -> "Plain", 
+    FontSlant -> "Plain", FontColor -> RGBColor[0., 0., 0.5019607843137255]], 
+   
+   Cell[
+    StyleData["Section"], CellFrame -> {{0, 0}, {0, 0.5}}, CellFrameColor -> 
+    RGBColor[0, 0.4, 0.2], FontFamily -> "Verdana Bold", FontSize -> 14, 
+    FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0., 0.4, 0.2]], 
+   Cell[
+    StyleData["Subsection"], CellFrame -> {{0, 0}, {0, 0}}, CellDingbat -> 
+    "\[FilledSquare]", CellFrameColor -> RGBColor[0.2, 0.6, 0.4], FontFamily -> 
+    "Verdana Bold", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> RGBColor[0., 0.4, 0.2]], 
+   Cell[
+    StyleData["Subsubsection"], CellFrame -> {{0, 0}, {0, 0}}, CellDingbat -> 
+    "\[EmptySquare]", CellMargins -> {{82, 3}, {2, 10}}, CellFrameColor -> 
+    RGBColor[0.2, 0.8, 0.4], FontFamily -> "Verdana Bold", FontSize -> 12, 
+    FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0., 0.4, 0.2]], 
+   Cell[
+    StyleData["Subsubsubsection"], CellDingbat -> "\[FilledCircle]", 
+    CellMargins -> {{110, 3}, {2, 10}}, MenuSortingValue -> 10000, FontFamily -> 
+    "Tahoma Bold", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> RGBColor[0., 0.4, 0.2]], 
+   Cell[
+    StyleData["Text"], CellMargins -> {{110, 10}, {7, 7}}, FontFamily -> 
+    "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", 
+    FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745], 
+    Background -> RGBColor[1., 0.997940032043946, 0.9429770351720455]], 
+   Cell[
+    StyleData["Step"], CellDingbat -> "\[FilledDiamond]", 
+    CellMargins -> {{110, 3}, {4, 4}}, MenuSortingValue -> 10000, FontFamily -> 
+    "Helvetica", FontSize -> 14, FontWeight -> "Plain", FontSlant -> "Italic",
+     FontColor -> RGBColor[0., 0.5019607843137255, 1.]], 
+   Cell[
+    StyleData["Code"], CellFrame -> {{0, 0}, {0, 0}}, 
+    CellMargins -> {{110, 10}, {7, 7}}, CellFrameColor -> RGBColor[1, 0.5, 0],
+     FontFamily -> "Courier", FontSize -> 12, FontWeight -> "Plain", 
+    FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745], 
+    Background -> 
+    RGBColor[0.9511558709086747, 0.9511558709086747, 0.9511558709086747]], 
+   Cell[
+    StyleData["Input"], CellMargins -> {{110, 10}, {7, 7}}, 
+    InitializationCell -> True, FontFamily -> "Verdana", FontSize -> 12, 
+    FontWeight -> "Bold", FontSlant -> "Plain", FontColor -> GrayLevel[0]], 
+   Cell[
+    StyleData["Output"], CellFrame -> {{0, 0}, {0, 0}}, 
+    CellMargins -> {{138, 10}, {7, 7}}, CellFrameColor -> GrayLevel[0.8], 
+    FontFamily -> "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Item"], CellMargins -> {{138, 10}, {7, 7}}, FontFamily -> 
+    "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", 
+    FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["ItemParagraph"], CellMargins -> {{138, 10}, {7, 7}}, 
+    FontFamily -> "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Subitem"], CellMargins -> {{167, 10}, {7, 7}}, FontFamily -> 
+    "Verdana", FontSize -> 10, FontWeight -> "Plain", FontSlant -> "Plain", 
+    FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["SubitemParagraph"], CellMargins -> {{167, 10}, {7, 7}}, 
+    FontFamily -> "Verdana", FontSize -> 10, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["ItemNumbered"], CellMargins -> {{110, 10}, {7, 7}}, FontFamily -> 
+    "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", 
+    FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["SubitemNumbered"], CellMargins -> {{138, 10}, {7, 7}}, 
+    FontFamily -> "Verdana", FontSize -> 10, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["InlineFormula"], FontFamily -> "Verdana", FontSize -> 12, 
+    FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["DisplayFormula"], CellMargins -> {{110, 3}, {4, 4}}, 
+    TextAlignment -> Center, TextJustification -> 0., FontFamily -> "Verdana",
+     FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["DisplayFormulaNumbered"], CellMargins -> {{110, 3}, {4, 4}}, 
+    TextAlignment -> Center, TextJustification -> 0., FontFamily -> "Verdana",
+     FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Program"], CellMargins -> {{110, 3}, {4, 4}}, FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Panel"], CellFrame -> 1, CellMargins -> {{110, 3}, {4, 4}}, 
+    CellFrameColor -> RGBColor[1, 0.4, 0.2], MenuSortingValue -> 10000, 
+    FontFamily -> "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745], 
+    Background -> 
+    RGBColor[0.9019607843137255, 0.9019607843137255, 0.9019607843137255]], 
+   Cell[
+    StyleData["Warning"], CellFrame -> 1, CellMargins -> {{110, 3}, {4, 4}}, 
+    CellFrameColor -> RGBColor[1, 0, 0], MenuSortingValue -> 10000, 
+    FontFamily -> "Verdana", FontSize -> 12, FontWeight -> "Plain", FontSlant -> 
+    "Plain", Background -> RGBColor[1, 0.85, 0.85]], 
+   Cell[
+    StyleData["Bookmark"], CellFrame -> 1, CellMargins -> {{110, 3}, {4, 4}}, 
+    CellFrameColor -> RGBColor[0, 0.67, 0], MenuSortingValue -> 10000, 
+    FontFamily -> "American Typewriter", FontSize -> 14, FontWeight -> 
+    "Plain", FontSlant -> "Plain", Background -> 
+    RGBColor[0.5019607843137255, 1., 0.]], 
+   Cell[
+    StyleData["FunctionDescription"], CellFrame -> {{0, 0}, {0, 2}}, 
+    CellMargins -> {{110, 3}, {4, 4}}, CellFrameColor -> RGBColor[1, 0.2, 0], 
+    MenuSortingValue -> 10000, FontFamily -> "Verdana", FontSize -> 12, 
+    FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745], 
+    Background -> 
+    RGBColor[0.9511558709086747, 0.9511558709086747, 0.9511558709086747]], 
+   Cell[
+    StyleData["FunctionComment"], CellFrame -> 0.5, 
+    CellMargins -> {{110, 3}, {4, 4}}, CellFrameColor -> GrayLevel[0.5], 
+    MenuSortingValue -> 10000, FontFamily -> "Verdana", FontSize -> 12, 
+    FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Figure"], TextAlignment -> Center, TextJustification -> 0., 
+    MenuSortingValue -> 10000, FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]], 
+   Cell[
+    StyleData["Figure Caption"], TextAlignment -> Center, TextJustification -> 
+    0., MenuSortingValue -> 10000, FontFamily -> "Times New Roman Italic", 
+    FontSize -> 12, FontWeight -> "Plain", FontSlant -> "Plain", FontColor -> 
+    RGBColor[0.2980392156862745, 0.2980392156862745, 0.2980392156862745]]}, 
+  Visible -> False, FrontEndVersion -> 
+  "10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, 2015)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 41, 0, 85, "Title"],
+Cell[CellGroupData[{
+Cell[646, 26, 24, 0, 47, "Section"],
+Cell[673, 28, 269, 7, 122, "Text"],
+Cell[945, 37, 71, 0, 46, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1053, 42, 42, 0, 47, "Section"],
+Cell[1098, 44, 149, 6, 122, "Text"],
+Cell[1250, 52, 26, 0, 27, "Input"],
+Cell[CellGroupData[{
+Cell[1301, 56, 684, 17, 19, "Input",
+ CellOpen->False,
+ InitializationCell->False],
+Cell[1988, 75, 310, 8, 42, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2347, 89, 31, 0, 47, "Section"],
+Cell[2381, 91, 52, 0, 46, "Text"],
+Cell[CellGroupData[{
+Cell[2458, 95, 49, 0, 31, "Item"],
+Cell[2510, 97, 25, 0, 31, "Item"],
+Cell[2538, 99, 34, 0, 31, "Item"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2609, 104, 43, 0, 35, "Subsection"],
+Cell[2655, 106, 220, 5, 84, "Text"],
+Cell[CellGroupData[{
+Cell[2900, 115, 5505, 124, 19, "Code",
+ CellOpen->False],
+Cell[8408, 241, 2159, 47, 64, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10616, 294, 31, 0, 35, "Subsection"],
+Cell[10650, 296, 1216, 25, 388, "Text"],
+Cell[CellGroupData[{
+Cell[11891, 325, 2145, 51, 19, "Code",
+ CellOpen->False],
+Cell[14039, 378, 1179, 27, 144, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15267, 411, 40, 0, 35, "Subsection"],
+Cell[15310, 413, 1406, 26, 426, "Text"],
+Cell[CellGroupData[{
+Cell[16741, 443, 1868, 44, 19, "Code",
+ CellOpen->False],
+Cell[18612, 489, 1236, 31, 110, "Output"]
+}, Open  ]],
+Cell[19863, 523, 62, 0, 46, "Text"],
+Cell[CellGroupData[{
+Cell[19950, 527, 1920, 43, 19, "Code",
+ CellOpen->False],
+Cell[21873, 572, 1112, 29, 92, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[23046, 608, 31, 0, 33, "Section"],
+Cell[23080, 610, 314, 6, 160, "Text"],
+Cell[CellGroupData[{
+Cell[23419, 620, 1885, 43, 19, "Code",
+ CellOpen->False],
+Cell[25307, 665, 1159, 28, 92, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26515, 699, 27, 0, 47, "Section"],
+Cell[26545, 701, 497, 8, 255, "Text"],
+Cell[CellGroupData[{
+Cell[27067, 713, 37, 0, 35, "Subsection"],
+Cell[CellGroupData[{
+Cell[27129, 717, 1633, 39, 19, "Code",
+ CellOpen->False],
+Cell[28765, 758, 1019, 27, 120, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29833, 791, 35, 0, 35, "Subsection"],
+Cell[29871, 793, 63, 0, 46, "Text"],
+Cell[CellGroupData[{
+Cell[29959, 797, 790, 20, 19, "Code",
+ CellOpen->False],
+Cell[30752, 819, 655, 19, 302, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31456, 844, 37, 0, 35, "Subsection"],
+Cell[31496, 846, 81, 3, 65, "Text"],
+Cell[CellGroupData[{
+Cell[31602, 853, 1340, 32, 19, "Code",
+ CellOpen->False],
+Cell[32945, 887, 921, 25, 92, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[33927, 919, 27, 0, 33, "Section"],
+Cell[33957, 921, 592, 11, 312, "Text"],
+Cell[CellGroupData[{
+Cell[34574, 936, 36, 0, 35, "Subsection"],
+Cell[34613, 938, 1085, 31, 236, "Text"],
+Cell[CellGroupData[{
+Cell[35723, 973, 2230, 52, 19, "Code",
+ CellOpen->False],
+Cell[37956, 1027, 1335, 35, 148, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39340, 1068, 35, 0, 35, "Subsection"],
+Cell[CellGroupData[{
+Cell[39400, 1072, 1944, 47, 19, "Code",
+ CellOpen->False],
+Cell[41347, 1121, 1090, 30, 332, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42486, 1157, 37, 0, 35, "Subsection"],
+Cell[42526, 1159, 190, 5, 103, "Text"],
+Cell[CellGroupData[{
+Cell[42741, 1168, 2184, 51, 19, "Code",
+ CellOpen->False],
+Cell[44928, 1221, 1414, 38, 150, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46391, 1265, 36, 0, 35, "Subsection"],
+Cell[46430, 1267, 372, 8, 141, "Text"],
+Cell[CellGroupData[{
+Cell[46827, 1279, 2499, 58, 19, "Code",
+ CellOpen->False],
+Cell[49329, 1339, 1568, 42, 178, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50946, 1387, 34, 0, 35, "Subsection"],
+Cell[50983, 1389, 449, 8, 122, "Text"],
+Cell[CellGroupData[{
+Cell[51457, 1401, 2474, 58, 19, "Code",
+ CellOpen->False],
+Cell[53934, 1461, 1560, 42, 178, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55567, 1511, 35, 0, 85, "Title"],
+Cell[55605, 1513, 326, 7, 141, "Text"],
+Cell[CellGroupData[{
+Cell[55956, 1524, 42, 0, 35, "Subsection"],
+Cell[CellGroupData[{
+Cell[56023, 1528, 44, 0, 27, "Subsubsection"],
+Cell[56070, 1530, 248, 7, 103, "Text"],
+Cell[CellGroupData[{
+Cell[56343, 1541, 2534, 55, 19, "Code",
+ CellOpen->False],
+Cell[58880, 1598, 1265, 31, 226, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60194, 1635, 62, 0, 27, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[60281, 1639, 4274, 106, 19, "Code",
+ CellOpen->False],
+Cell[64558, 1747, 1907, 50, 346, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[66526, 1804, 37, 0, 35, "Subsection"],
+Cell[66566, 1806, 122, 3, 65, "Text"],
+Cell[CellGroupData[{
+Cell[66713, 1813, 2341, 53, 19, "Code",
+ CellOpen->False],
+Cell[69057, 1868, 1376, 37, 134, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70482, 1911, 38, 0, 35, "Subsection"],
+Cell[70523, 1913, 552, 12, 179, "Text"],
+Cell[CellGroupData[{
+Cell[71100, 1929, 2095, 47, 19, "Code",
+ CellOpen->False],
+Cell[73198, 1978, 1257, 34, 122, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}
+]
+*)
+
+(* End of internal cache information *)

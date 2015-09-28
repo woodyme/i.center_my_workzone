@@ -1,0 +1,4 @@
+Manipulate[
+Dynamic@navigationChart[],
+Initialization:>(<initcode>)
+]

@@ -1,0 +1,4 @@
+Manipulate[
+Dynamic@predictorChart[],
+Initialization:>(<initcode>)
+]

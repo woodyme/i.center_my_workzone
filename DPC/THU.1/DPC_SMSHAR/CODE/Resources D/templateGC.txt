@@ -1,0 +1,4 @@
+Manipulate[
+Dynamic@ganttClock[],
+Initialization:>(<initcode>)
+]

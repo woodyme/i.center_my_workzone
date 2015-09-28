@@ -1,0 +1,635 @@
+(* WARNING *)
+(* IN THIS SOURCE ALL FUNCTIONS MUST END ON A ';' *)
+
+(* define local functions *)
+selectedwbs[ddd_Integer] :=
+    Flatten[Take[levelSummSetsWBS,ddd][[All,2]],1];
+
+daisyTree[ddd_Integer] :=
+    If[ !graphsOnlyFlag,(* +++ new *)
+        Deploy@Show[
+            epsrBuildDTonDDD[{epsrdb,epsrsd,chunks1,chunks2,summSdatesI,uidI,radii[#],tetas[#],uidWbs[#],MemberQ[summUids,uidWbs[#]]}]&/@selectedwbs[ddd],
+            ImageSize->450,
+           ImagePadding->0,
+           Background->Opacity[0.8,Black]],(* +++ new *)
+        Deploy@Show[
+         epsrBuildDTonDDDGraphOnly[{epsrdb,epsrsd,chunks1,chunks2,summSdatesI,uidI,radii[#],tetas[#],uidWbs[#],MemberQ[summUids,uidWbs[#]]}]&/@selectedwbs[ddd],
+         ImageSize->450,
+        ImagePadding->0,
+        Background->Opacity[0.8,Black]]
+    ];
+
+(* single modules *)
+  dtBrowser[] :=
+      Grid[{
+          {Style["DDD",14,Black,FontFamily->"Verdana"],RadioButtonBar[Dynamic@setDDD,Range[maxddd]]},
+          {Style["Graphics Only",14,Black,FontFamily->"erdana"],Checkbox[Dynamic@graphsOnlyFlag]},
+          {"",daisyTree[setDDD]}
+      },Alignment->{{Right,Left},Top}];
+
+navChart[] :=
+ Module[{a, b, c, tBlue, tRed, tGreen, epsrPctRate, navChartGraf, p1,
+   p2, p3, p4, p5}, Manipulate[a = Abs[p2 - p1];
+   tBlue = a[[2]]/a[[1]];
+   b = Abs[p3 - p2];
+   tRed = b[[2]]/b[[1]];
+   c = Abs[p5 - p4];
+   tGreen = c[[2]]/c[[1]];
+   epsrPctRate = Round[tRed/tGreen, 0.01];
+   navChartGraf =
+    Show[If[notl,
+      epsrSCPlotRaster, {epsrSCPlotRaster, {epsrSCPlotRaster,
+        Graphics[{Darker@Blue, Line[{p1, p2}], Red, Line[{p2, p3}],
+          Darker@Green, Line[{p4, p5}], Black, Dashed,
+          Line[{{p2[[1]], 0}, {p2[[1]], 400}}], Red, Dashed,
+          Line[{{p3[[1]], 0}, {p3[[1]], 400}}],
+          Text[Style[" " <> ToString@Round[tRed/tBlue, 0.01] <> " ",
+            White, 14], (p2 + p3)/2, {-2, -2}, Background -> Blue],
+          Text[Style[" " <> ToString@Round[tRed/tGreen, 0.01] <> " ",
+            White, 14], (p2 + p3)/2, {-2, 0},
+           Background -> Darker@Green],
+          Text[Style[" " <> ToString@Round[tBlue/tGreen, 0.01] <> " ",
+             White, 14], (p1 + p2)/2, {0, 2},
+           Background -> Darker@Green]}]}}],
+     ImageSize -> 650], {{notl, False,
+     Style["No Trend Lines", 14]}, {True, False}}, {{p1,
+     If[notl, {0, 0}, {15, 15}]},
+    Locator}, {{p2, If[notl, {0, 0}, {60, 40}]},
+    Locator}, {{p3, If[notl, {0, 0}, {100, 150}]},
+    Locator}, {{p4, If[notl, {0, 0}, {60, 80}]},
+    Locator}, {{p5, If[notl, {0, 0}, {100, 200}]}, Locator},
+   Deployed -> True, Paneled -> False]];
+
+gantClockBrowser[] :=
+    Grid[{
+         {Style["Tree Level",14,Black,FontFamily->"Verdana"],RadioButtonBar[Dynamic@GClevel,Flatten[{Range[maxddd],"D"}]]},
+         {"",radarImage[GClevel]}
+     },Alignment->{{Right,Left},Top}];
+
+predictor[] :=
+    Module[ {bluec,greenc,yellowc,orangec,trck,bl,ATbl,tra,stre,delLin,p1,p2},
+        Manipulate[
+        {{bluec,greenc,yellowc,orangec},trck} = epsrPredictorData;
+        bl = Transpose[{Range[Length@bluec],bluec}];
+        ATbl = {#[[1]]+tra+stre #[[2]],#[[2]]}&/@bl;
+        If[ p1[[2]]!=p2[[2]],
+            delLin = p1[[1]]+(100-p1[[2]])(p2[[1]]-p1[[1]])/(p2[[2]]-p1[[2]])-Length[bluec],(* length bluec is dur in days *)
+            ""
+        ];
+        If[ Length@trck==0,
+            trck = {{0,0}}
+        ];(*<<<added*)
+        If[ Length@bluec>0,
+            Grid[{
+            {Show[
+            ListLinePlot[{bluec,greenc,yellowc,orangec,trck,ATbl},PlotStyle->{Blue,Green,Yellow,Orange,{Thick,Black},{Dashed,Blue}}],
+            Graphics[{Red,Dashed,Line[{p1,p2}]}],
+            ImageSize->650,GridLines->Automatic]},
+            {Grid[{
+            {"Total end delay",Last[ATbl][[1]]-Length@bluec},
+            {"Net delay shift",tra},
+            {"Delay due to prod loss",Last[ATbl][[1]]-Length@bluec-tra},
+            {"Relative Productivity",Round[100 1/(1+stre 100/Length@bluec)]},
+            {"Delay w Lin. Extrapol.",delLin}},
+            Frame->All,FrameStyle->Gray,Alignment->{{Left},{Right}}]}},Alignment->{Center,Top}],
+            ""
+        ],
+        {{tra,0,"Shift"},0,100,1},{{stre,0,"Stretch"},0,10,0.1},{{p1,{0,15}},Locator},{{p2,{30,15}},Locator},
+        Initialization:>(delLin="";),
+        SaveDefinitions->True,
+        Deployed->True]
+    ];
+
+(* Combined modules *)
+navigationChart[] :=
+    Grid[{{dtBrowser[],navChart[]}}];
+
+ganttClock[] :=
+    Grid[{{gantClockBrowser[],navChart[]}}];
+
+predictorChart[] :=
+    Grid[{{dtBrowser[],predictor[]}}];
+
+(* supporting functions *)
+radarImage[gclev_] :=
+    GCmakeRadarImage[epsrdb,epsrsd,metadata,chunks1,chunks2,summUids,summSdates,summSdatesI, gclev];(* !!! replace repData by explicte list of componenensts *)
+
+
+makeDaisyTree[structdata_List] :=
+    Block[ {wbsUIDList,wbs2UID,uid2WBS,levelSummSetsUIDS,levelSummSetsWBS,summListWBS,tetas,radii},
+        wbsUIDList = structdata[[1]];
+        (wbs2UID[#[[2]]] = #[[1]])&/@wbsUIDList;
+        wbs2UID[{}] = {};(* needed as random condition *)
+        (uid2WBS[#[[1]]] = #[[2]])&/@wbsUIDList;
+        levelSummSetsUIDS = Sort@structdata[[2]];
+        levelSummSetsWBS = {#[[1]],uid2WBS/@#[[2]]}&/@levelSummSetsUIDS;
+        summListWBS = Flatten[levelSummSetsWBS[[All,2]],1];
+        tetas = {#,tetasFunc[#,levelSummSetsWBS]}&/@summListWBS;
+        radii = {#,rad[#,10]}&/@summListWBS;
+        {levelSummSetsWBS,radii,tetas}
+    (* radii and tetas are passed as pairs {wbs,value} *)
+    ];
+
+tetasFunc[wbs_List,data_List] :=
+    Block[ {g = 0.01,pwbs,rwbs,leafC,ts,t0,delt,t1},
+        Which[
+        Length@wbs>1,
+        pwbs = parentwbs[wbs];
+        rwbs = rank[wbs,data];
+        ts = tetasFunc[pwbs,data];
+        t0 = ts[[1]];
+        leafC = leafCount[pwbs,data];
+        delt = (Subtract@@Reverse[ts]-(leafC-1)g)/leafC;(* net leaf width *)
+        t1 = t0+(rwbs-1)(delt+g);
+        {t1,t1+delt},
+
+        Length@wbs==1,
+        {0,2Pi}
+        ]
+    ];
+
+rad[wbs_List,del_Integer] :=
+    Block[ {lev},
+        lev = Length@wbs;
+        {del (lev-1), del lev}
+    ];
+
+
+
+epsrBuildDTonDDD[{epsrdb_List,epsrsd_List,chunks1_List,chunks2_List,summSdatesI_,uidI_,{r1_Integer,r2_Integer},{teta1_,teta2_},uid_Integer,notEmptyFlag_}] :=
+    Block[ {i,info,uiddummy, nam,stdat,fidat,sdstr,sdpct,pcstSched,score,color,norm,len,opc,opcb,dt,tmed,dr,u,umed,pts, rd,cd,gdirectiv,
+        selectedDTItem,stepCount
+        },
+        tmed = (teta2+teta1)/2;
+        dr = r2-r1;
+        umed = {Cos[tmed],Sin[tmed]};
+        cd = If[ r1==0,
+                 {0,0},
+                 (r1+dr/2)umed
+             ];
+        rd = 0.6 Min[dr/4,(r1+dr/2)Abs[(teta2-teta1)]/2];
+        gdirectiv = {Gray,Thickness[Small]};
+        If[ notEmptyFlag,
+            info = chunks1[[uidI[uid],1]];
+            {uiddummy,nam,stdat,fidat,sdstr,sdpct,pcstSched,score,color,norm,len} = info;
+            {opc,opcb} = colorFunc[score,color];
+            Graphics[{
+            EdgeForm[Directive[gdirectiv]],
+            Directive[color,Opacity[opc]],
+            daisyLeaf[r1,r2,teta1,teta2],
+            Directive[color,Opacity[opcb]],
+            EdgeForm[],
+            Tooltip[Button[Mouseover[Disk[cd,rd],{White,Opacity[1],Disk[cd,rd]}],
+                selectedDTItem = uid;
+                epsrSCPlot = epsrBuildSConUID[chunks1,chunks2,uidI,selectedDTItem,summSdatesI];
+                epsrSCPlotRaster = Rasterize[epsrSCPlot];
+                (*epsrLASPart = epsrBuildLASonUID[selectedDTItem,30,epsrdb,epsrsd];*)
+                epsrPredictorData = {chunks1[[uidI[selectedDTItem]]][[3,#]]&/@{1,2,3,4},epsrGetPtsOfOneTrack[chunks2,selectedDTItem,summSdatesI[[uidI[selectedDTItem]]]][[All,1;;2]]},
+                Method->"Queued",
+                Appearance->None],nam]}
+            ],
+            Graphics[{
+            Directive[Black,Opacity[0]],
+            EdgeForm[{Gray,Thickness[Small]}],
+            daisyLeaf[r1,r2,teta1,teta2],
+            Directive[Gray,Opacity[0.5]],
+            EdgeForm[],
+            Tooltip[Button[Disk[cd,rd],
+                epsrSCPlot = Style["Empty item",Bold, Red,14,FontFamily->"Verdana"],(*;
+                epsrLASPart = Style["No LA sheet",Bold, Red,14,FontFamily->"Verdana"],*)
+                Method->"Queued",
+                Appearance->None],"MS Block"]}
+            ]
+        ]
+    ];
+
+epsrBuildSConUID[chunks1_List,chunks2_List,uidI_,uid_Integer,summSdatesI_] :=
+    Block[ {dset,nam,g1,g2},
+        dset = chunks1[[uidI[uid]]];
+        g1 = epsrPlotSC[dset];
+        nam = dset[[1,2]];
+        g2 = If[ Length@g1>0,
+                 epsrPlotOneTrack[chunks2,uid,summSdatesI[[uidI[uid]]]],
+                 Graphics[{Text["SC Too Short",{0,0}]}]
+             ];(* catch short sc *)
+        Show[
+        g1,
+        g2,
+        ImageSize->650,
+        PlotRange->All,
+        ImagePadding->All,
+        GridLines->Automatic,
+        PlotLabel->Style[Framed[nam],12,Gray,FontFamily->"Verdana"]]
+    ];
+
+epsrPlotOneTrack[allTracks_List,uid_Integer,uidES_Integer] :=
+    Block[ {trck,pts,g1,g2,g3,g,oldyr},
+        trck = epsrGetOneTrack[allTracks,uid];
+        pts = {dateIndex[#[[1]]]-uidES+1,#[[2]],#[[1]]}&/@trck[[2]];(* using one-based indexing *)
+        pts = Sort@Select[pts,!And[#[[1]]<0,#[[2]]==0]&];(* clip zero progress points before start *)
+        If[ dateIndCorr>0,
+            pts[[All,1]] = pts[[All,1]]+dateIndCorr
+        ];(* +++ *)
+        If[ Length@pts>0,
+            g1 = ListLinePlot[#[[1;;2]]&/@pts,PlotStyle->Black];(* black line *)
+            g2 = Graphics[{Black,PointSize->Medium,Tooltip[Point[#[[1;;2]]],#[[3]]]&/@pts}];(* dots with date *)
+            g3 = Graphics[{Black,PointSize[Large],Point[Last[pts][[1;;2]]]}];(* last point *)
+            g = {g1,g3,g2},
+            (*else*)
+            g = {}
+        ];
+        g
+    ];
+
+(* dset=chunks1[[uid]], uid is the index of uid in the chunks1 data sets *)
+epsrPlotSC[dset_List] :=
+    Block[ {summUID,nam,stdat,fidat,sd,sdpct,pctSched,score,flag,norm,len,p2,p3,p4,facs},
+        If[ Length@dset[[2]]>2,(* catches case of short scurve; looks at point count of differntial curve*)(* modified form dset >0 *)
+            {summUID,nam,stdat,fidat,sd,sdpct,pctSched,score,flag,norm,len} = dset[[1]];
+            p2 = dset[[2]];
+            norm = Max[p2]/30;(* arbitrary scaling factor *)
+            p3 = dset[[3]];
+            p4 = dset[[4]];
+            facs = Round[#,0.01]&/@(p4/p4[[1]]);
+            {
+            (*the differential curve*)
+            ListLinePlot[p2/norm,Filling->Axis,PlotStyle->Gray,FillingStyle->Opacity[0.2,Gray]],
+            (*the blue, green, yellow, orange s-curves*)
+            ListLinePlot[p3,
+            PlotStyle->{{Thick,Blue},Gray,Gray,Gray},
+            Filling->
+            {1->{{2},Directive[Green,Opacity[0.2]]},
+            2->{{3},Directive[Yellow,Opacity[0.5]]},
+            3->{{4},Directive[Orange,Opacity[0.4]]}},
+            GridLines->Automatic,
+            GridLinesStyle->LightGray
+            ],
+            Graphics[{Pink, Dotted,MapThread[Tooltip[Line[{{len,100},{len-100/#1,0}}],#2]&,{p4,facs}]}],
+            Graphics[{PointSize->Large,Green,Point[{.4len,50}]}],
+            Graphics[{PointSize->Large,Red,Point[{.6len,50}]}],
+            Graphics[{PointSize->Medium,Black,Point[{.5len,50}]}],
+            monthEndMarkers[stdat,fidat,0.6]
+            },
+            (*else*)
+            {}
+        ]
+    ];
+
+monthEndMarkers[s_String,f_String,c_] :=
+    Block[ {monthEnds,x,y,firstMonth,months,monthsEndIndexes,xpts,labs,firstyr,mosim,yrs},
+        If[ DateDifference[DateList[{s,{"Day","Month","Year"}}],DateList[{f,{"Day","Month","Year"}}]]<14,
+            {},
+            monthEnds = MapThread[#1->#2&,{Range[12],{31,28,31,30,31,30,31,31,30,31,30,31}}];
+            x = DateList[{s,{"Day","Month","Year"}}];
+            y = DateList[{f,{"Day","Month","Year"}}];
+            firstMonth = x[[2]];
+            firstyr = x[[1]];
+            months = (Mod[#,12]/.{0->12})&/@Range[firstMonth,firstMonth+moCount[{x,y}]-1];
+            monthsEndIndexes = Accumulate[months/.monthEnds]-x[[3]];(* zero based index; s is on 0 on the timeline  *)
+            (* create an image of the months; dropping the first month prevents adding 1 when proejct starts in Januari *)
+            mosim = Prepend[Accumulate[(#!=1&/@Drop[months,1])/.{True->0,False->1}],0];
+            yrs = StringDrop[ToString[#],2]&/@(Table[firstyr,{Length@months}]+mosim);
+            xpts = Transpose[{monthsEndIndexes,Table[120,{Length@months}]}];(* position the month end points on level 120% *)
+            labs = MapThread[ToString[#1]<>"\n"<>ToString[#2]<>"\n"<>#3 &,{months/.monthEnds,months,yrs}];
+            Graphics[{
+            Gray,PointSize[Medium],Point/@xpts,
+            Gray,MapThread[Text[#1,#2,{0,2 c}]&,{labs,xpts}],
+            Dotted,LightGray,Line[{{#[[1]],0},#}]&/@xpts
+            }]
+        ]
+    ];
+moCount[{x_List,y_List}] :=
+    Block[ {m1,y1,m2,y2},
+        m1 = x[[2]];
+        m2 = y[[2]];
+        y1 = x[[1]];
+        y2 = y[[1]];
+        12-m1+12(y2-y1-1)+m2 +1
+    (* always ok *)
+        ];
+
+epsrBuildDTonDDDGraphOnly[{epsrdb_List,epsrsd_List,chunks1_List,chunks2_List,summSdatesI_,uidI_,{r1_Integer,r2_Integer},{teta1_,teta2_},uid_Integer,notEmptyFlag_}] :=
+    Block[ {i,info,uiddummy, nam,stdat,fidat,sdstr,sdpct,pcstSched,score,color,norm,len,opc,opcb,dt,tmed,dr,u,umed,pts, rd,cd,gdirectiv,
+        selectedDTItem,stepCount
+        },
+        tmed = (teta2+teta1)/2;
+        dr = r2-r1;
+        u = Table[{ Cos[teta1+i dt],Sin[teta1+i dt]},{i,0,32}];
+        umed = {Cos[tmed],Sin[tmed]};
+        cd = If[ r1==0,
+                 {0,0},
+                 (r1+dr/2)umed
+             ];
+        rd = 0.9Min[dr/4,(r1+dr/2)Abs[(teta2-teta1)]/2];
+        gdirectiv = {Gray,Thickness[Small]};
+        If[ notEmptyFlag,
+            info = chunks1[[uidI[uid],1]];
+            {uiddummy,nam,stdat,fidat,sdstr,sdpct,pcstSched,score,color,norm,len} = info;
+            {opc,opcb} = colorFunc[score,color];
+            Graphics[{
+            Directive[color,Opacity[opc]],
+            EdgeForm[Directive[gdirectiv]],
+            daisyLeaf[r1,r2,teta1,teta2],
+            Directive[color,Opacity[opcb]]
+            }
+            ],
+            Graphics[{
+            Directive[Black,Opacity[0]],
+            EdgeForm[{Gray,Thickness[Small]}],
+            daisyLeaf[r1,r2,teta1,teta2]
+            }
+            ]
+        ]
+    ];
+
+colorFunc[score_,color_] :=
+    Block[ {opc,opcb},
+        Which[
+        color===Green,opc = Min[0.8,1-Abs[score]/100];
+                      opcb = 0.2,
+        color===Red,opc = Min[0.8,Abs[score]/100];
+                    opcb = 0.2,
+        color===Orange,opc = Min[0.8,Abs[score]/100];
+                       opcb = 0.2,
+        color===Yellow,opc = Min[0.5,Abs[score]/100];
+                       opcb = 0.5,
+        color===Blue,opc = 0.5;
+                     opcb = 0.3,
+        color===LightGray,opc = 0.3;
+                          opcb = 0.3,
+        color===Black,opc = 0.7;
+                      opcb = 0.3,
+        color==White,opc = 1;
+                     opcb = 1(* catches case white == future; where does it come from ? *)
+        ];
+        {opc,opcb}
+    ];
+
+daisyLeaf[r1_,r2_,teta1_,teta2_] :=
+    Block[ {stepCount,dt,p1,p2,p3,p4,p23,p41},
+        stepCount = Ceiling[Abs[teta2-teta1]/Min[11.25 2Pi/360,Abs[teta2-teta1]]];
+        dt = (teta2-teta1)/stepCount;
+        p1 = {r1 Cos[teta1],r1 Sin[teta1]};
+        p2 = {r2 Cos[teta1],r2 Sin[teta1]};
+        p3 = {r2 Cos[teta2],r2 Sin[teta2]};
+        p4 = {r1 Cos[teta2],r1 Sin[teta2]};
+        p23 = {r2 Cos[teta1+# dt],r2 Sin[teta1+# dt]}&/@Range[0,stepCount];
+        p41 = {r1 Cos[teta2-# dt],r1 Sin[teta2-# dt]}&/@Range[0,stepCount];
+        FilledCurve[{Line[{p1,p2}],BSplineCurve[p23],Line[{p3,p4}],BSplineCurve[p41]}]
+    ];
+
+GCmakeRadarImage[epsrdb_,epsrsd_,metadata_,chunks1_,chunks2_,summUids_,summSdates_,summSdatesI_,level_] :=
+    Module[ {structdata,lastsd,lastsdI,db,summs,summsUIDS,summsWBS,summsWBSL,wbs2uid,namuid,esuid,efuid,wfuid,
+    summsNam,summsES,summsEF,summswf,
+    levelSummSetsUIDS,uid2wbs,levelSummSetsWBS,
+    flaguid,scoreuid,pctuid,
+    deepestNodes,model,localzero,timestep,starts,ends,
+    rnul = 400,delr = 20,bars,
+    clock,clockPast,clockR, handles,backDisk,shorthandles,today,todayth,lastsdth,lastsdMark,startstop,
+    selectedDTItem,
+    uidI},
+
+        (* data *)
+        (uidI[summUids[[#]]] = #)&/@Range[Length@summUids];(* copied from genDataForCDFReport *)
+        structdata = epsrsd;
+        lastsd = metadata[[2]];
+        lastsdI = dateIndex[lastsd];
+        db = epsrdb;
+        summs = Select[db,#[[epsrLoc["summ"]]]=="1"&];
+        summsUIDS = summs[[All,epsrLoc["uid"]]];
+        summsWBS = summs[[All,epsrLoc["wbs"]]];
+        summsWBSL = StringSplit[#,"."]&/@summsWBS;
+        MapThread[(wbs2uid[#1] = #2)&,{summsWBSL,summsUIDS}];
+        MapThread[(uid2wbs[#1] = #2)&,{summsUIDS,summsWBSL}];
+        levelSummSetsUIDS = Sort@structdata[[2]];
+        levelSummSetsWBS = {#[[1]],uid2wbs/@#[[2]]}&/@levelSummSetsUIDS;
+        summsNam = summs[[All,epsrLoc["nam"]]];
+        summsES = summs[[All,epsrLoc["bles"]]];
+        summsEF = summs[[All,epsrLoc["blef"]]];
+        summswf = summs[[All,epsrLoc["wf"]]];
+        MapThread[(namuid[#1] = #2)&,{summsUIDS,summsNam}];
+        MapThread[(esuid[#1] = #2)&,{summsUIDS,summsES}];
+        MapThread[(efuid[#1] = #2)&,{summsUIDS,summsEF}];
+        MapThread[(wfuid[#1] = #2)&,{summsUIDS,summswf}];
+        MapThread[(flaguid[#1] = #2)&,{chunks1[[All,1]][[All,1]],chunks1[[All,1]][[All,9]]}];
+        MapThread[(scoreuid[#1] = #2)&,{chunks1[[All,1]][[All,1]],chunks1[[All,1]][[All,8]]}];
+        MapThread[(pctuid[#1] = #2)&,{chunks1[[All,1]][[All,1]],chunks1[[All,1]][[All,6]]}];
+
+        (* model *)
+        Which[
+        level=="D",deepestNodes = Complement[summsWBSL,Pick[summsWBSL,GChasChild[#,summsWBSL]&/@summsWBSL]],
+        level<=Length@levelSummSetsWBS,deepestNodes = Cases[levelSummSetsWBS,{level,__}][[1,2]],
+        True,deepestNodes = Complement[summsWBSL,Pick[summsWBSL,GChasChild[#,summsWBSL]&/@summsWBSL]]
+        ];
+        model = GCModel[deepestNodes,esuid,efuid,namuid,flaguid,scoreuid,wbs2uid];
+        localzero = model[[1,1]];
+        model[[All,1]] = model[[All,1]]-localzero;
+        model[[All,2]] = model[[All,2]]-localzero;
+        timestep = 360/Max[model[[All,2]]];
+        starts = model[[All,1]];(* carefull here: no Union anaymore *)
+        ends = model[[All,2]];
+        GCItems = model[[All,4]];(* try to set it as a global for access by button *)
+
+        (* heksenkring *)
+        bars =
+        Graphics[{
+        model[[#,7]],AbsoluteThickness[5],
+        Tooltip[
+        Circle[{0,0},rnul+# delr,{(90-model[[#,1]] timestep) Degree,(90-model[[#,2]] timestep )Degree}],
+        model[[#,3]]
+        ],
+        Button[
+        Mouseover[
+        {Opacity[1,White],Disk[(rnul+# delr){Cos[(90-model[[#,1]] timestep) Degree],Sin[(90-model[[#,1]] timestep) Degree]},6]},
+        {Opacity[1,Red],Disk[(rnul+# delr){Cos[(90-model[[#,1]] timestep) Degree],Sin[(90-model[[#,1]] timestep) Degree]},12]}
+        ],
+
+        selectedDTItem = GCItems[[#]];(* this has solved the working of the button in cdf *)
+        If[ And[Head[selectedDTItem]===Integer,MemberQ[summUids,selectedDTItem]],
+            epsrSCPlot = epsrBuildSConUID[chunks1,chunks2,uidI,selectedDTItem,summSdatesI];
+            epsrSCPlotRaster = Rasterize[epsrSCPlot],
+            (*
+            epsrLASPart = epsrBuildLASonUID[selectedDTItem,30,epsrdb,epsrsd];
+            epsrPredictorData = {chunks1[[uidI[selectedDTItem]]][[3,#]]&/@{1,2,3,4},epsrGetPtsOfOneTrack[chunks2,selectedDTItem,summSdatesI[[uidI[selectedDTItem]]]][[All,1;;2]]},
+            *)
+            (* else *)
+            epsrSCPlot = Style["No SC available",Red,14, Bold, FontFamily->"Verdana"];
+            epsrSCPlotRaster = Style["No SC available",Red,14, Bold, FontFamily->"Verdana"];
+        (*
+            epsrLASPart = "";
+            epsrPredictorData = Style["No SC available",Red,14, Bold, FontFamily->"Verdana"]
+            *)
+        ],
+        Method->"Queued",
+        Appearance->None
+        ]
+        }
+        ]&/@Range[Length@model];
+        clockR = rnul+(Length[model]+2) delr;
+        handles = Join[
+        Table[Graphics[{Green,Thin,Line[{{0,0},clockR{Cos[(-starts[[i]] timestep+90) Degree],Sin[(-starts[[i]] timestep+90) Degree]}}]}],{i,1,Length@starts}],
+        Table[Graphics[{Red,Thin,Line[{{0,0},clockR{Cos[(-ends[[i]] timestep+90) Degree],Sin[(-ends[[i]] timestep+90) Degree]}}]}],{i,1,Length@ends}]
+        ];
+        backDisk = Graphics[{EdgeForm[Directive[Gray,Thick]],LightGray,Disk[{0,0},clockR+2delr]}];
+        shorthandles = Join[
+        Table[Graphics[{Green,Thick,
+        Tooltip[
+        Line[{clockR{Cos[(-starts[[i]] timestep+90) Degree],Sin[(-starts[[i]] timestep+90) Degree]},
+        (clockR+2delr){Cos[(-starts[[i]] timestep+90) Degree],Sin[(-starts[[i]] timestep+90) Degree]}}],
+        revDateIndex[localzero+starts[[i]]]]
+        }],{i,1,Length@starts}],
+        Table[Graphics[{Red,Thick,
+        Tooltip[
+        Line[{clockR{Cos[(-ends[[i]] timestep+90) Degree],Sin[(-ends[[i]] timestep+90) Degree]},
+        (clockR+2delr){Cos[(-ends[[i]] timestep+90) Degree],Sin[(-ends[[i]] timestep+90) Degree]}}],
+        revDateIndex[localzero+ends[[i]]]]
+        }],{i,1,Length@ends}]
+        ];
+        todayth = -(dateIndex[DateString[Date[][[1;;3]],{"Day","-","Month","-","Year"}]]-localzero) timestep+90;
+        today = Graphics[{
+        Black,AbsoluteThickness[5],
+        Tooltip[
+        Line[{(clockR+2delr){Cos[todayth Degree],Sin[todayth Degree]},(clockR+2.5delr){Cos[todayth Degree],Sin[todayth Degree]}}],
+        DateString[Date[][[1;;3]],{"Day","-","Month","-","Year"}]
+        ],
+        Black,AbsoluteThickness[1],Line[{{0,0},(clockR+2delr){Cos[todayth Degree],Sin[todayth Degree]}}]
+        }];
+        clock = Graphics[{
+        Opacity[0.75,Black],EdgeForm[Directive[Gray,AbsoluteThickness[1]]], Disk[{0,0},clockR ,{todayth Degree,-270 Degree}]}];
+        clockPast = Graphics[{
+        Opacity[0.65,Black],EdgeForm[Directive[Gray,AbsoluteThickness[1]]], Disk[{0,0},clockR ,{90 Degree,todayth Degree}]}];
+        startstop = Graphics[{
+        Blue,AbsoluteThickness[5],
+        Tooltip[
+        Line[{(clockR+2delr){0,1},(clockR+2.5delr){0,1}}],
+        StringJoin["Start: ",revDateIndex[starts[[1]]+localzero],"\n","Finish: ",revDateIndex[Max[ends]+localzero]]
+        ],
+        Black,AbsoluteThickness[1],Dashed,Line[{{0,0},(clockR+2delr){Cos[todayth Degree],Sin[todayth Degree]}}]
+        }];
+        lastsdth = -(lastsdI-localzero) timestep+90;
+        lastsdMark = Graphics[{
+        Orange,AbsoluteThickness[5],
+        Tooltip[
+        Line[{(clockR+2delr){Cos[lastsdth Degree],Sin[lastsdth Degree]},(clockR+2.5delr){Cos[lastsdth Degree],Sin[lastsdth Degree]}}],
+        lastsd
+        ],
+        Yellow,AbsoluteThickness[1],Line[{{0,0},(clockR+2delr){Cos[lastsdth Degree],Sin[lastsdth Degree]}}]
+        }];
+        Deploy@Show[{backDisk,clock,clockPast,bars,handles,shorthandles,today,lastsdMark,startstop},ImageSize->650]
+    ];
+
+GCModel[deepestNodes_,esuid_,efuid_,namuid_,flaguid_,scoreuid_,wbs2uid_] :=
+    Module[ {},
+        Sort[
+            Transpose[{
+            dateIndex/@(esuid[wbs2uid[#]]&/@deepestNodes),(* 1 bles *)
+            dateIndex/@(efuid[wbs2uid[#]]&/@deepestNodes),(* 2 blef *)
+            namuid[wbs2uid@#]&/@deepestNodes,(* 3 name *)
+            wbs2uid/@deepestNodes, (* 4 uid *)
+            flaguid[wbs2uid@#]&/@deepestNodes,(* 5 flag *)
+            scoreuid[wbs2uid@#]&/@deepestNodes, (* 6 score *)
+            GCcolorfunc[flaguid[wbs2uid@#],scoreuid[wbs2uid@#]]&/@deepestNodes (* 7 opacity expr *)
+            }]]
+    ];
+
+GCcolorfunc[flag_,score_] :=
+    Module[ {op,fl},
+        fl = flag;
+        Which[
+            And[Head[score]=!=Integer,Head[score]=!=Rational,Head[score]=!=Real],fl = Purple;
+                                                                                 op = 1,
+            Abs[score] <= 2,op = 0.3,
+            2<Abs[score]<= 10,op = 0.5,
+            Abs[score]>10,op = 1
+            ];
+        Opacity[op,fl]
+    ];
+
+epsrGetPtsOfOneTrack[allTracks_List,uid_Integer,uidES_Integer] :=
+    Block[ {trck,pts},
+        trck = Flatten[Select[allTracks,#[[1]]==uid&],1];
+        trck = epsrGetOneTrack[allTracks,uid];
+        pts = {dateIndex[#[[1]]]-uidES+1,#[[2]],#[[1]]}&/@trck[[2]];(* using one-based indexing *)
+        pts = Sort@Select[pts,!And[#[[1]]<0,#[[2]]==0]&];(* clip zero progress points before start *)
+        pts
+    ];
+
+epsrGetOneTrack[allTracks_List,uid_Integer] :=
+    Flatten[Select[allTracks,#[[1]]==uid&],1];
+
+GChasChild[wbs_,wbslist_] :=
+    Length[Cases[wbslist,Flatten[{wbs,{__}}]]]>0;
+
+summImmediateChilds[wbs_List,data_List] :=
+    Block[ {lev,wbss},
+        lev = Length@wbs;
+        wbss = Cases[data,{lev+1,___}][[1,2]];
+        Cases[wbss,Flatten[{wbs,{___}}]]
+    ];
+
+parentwbs[wbs_List] :=
+    Drop[wbs,-1];
+
+leafCount[wbs_List,data_List] :=
+    Length[summImmediateChilds[wbs,data]];
+
+rank[wbs_List,data_List] :=
+    Block[ {pwbs},
+        pwbs = parentwbs[wbs];
+        Position[summImmediateChilds[pwbs,data],wbs]//Flatten//First
+    ];
+
+
+(* data init *)
+epsrDLOdata =
+    {"uid",
+    "wbs",
+    "olev",
+    "id",
+    "nam",
+    "dur",
+    "pct",
+    "es",
+    "ef",
+    "bles",
+    "blef",
+    "bldur",
+    "slack",
+    "succ",
+    "summ",
+    "ms",
+    "att1",
+    "att2",
+    "att3",
+    "att4",
+    "att5",
+    "wf",
+    "num2",
+    "num3",
+    "num4",
+    "num5",
+    "epsiFlag",
+    "work"};
+(epsrLoc[#] = First[Flatten[Position[epsrDLOdata,#]]])&/@epsrDLOdata;
+(* this indexing should be done on the availble project dates *)(* +++ !!! +++ *)
+absoluteZero = {First@DateList[] - 3, 1, 1};
+dates = Table[DatePlus[absoluteZero, i], {i, 0, 4999}];
+dateSTR = DateString[#, {"Day", "-", "Month", "-", "Year"}] & /@ dates;
+(dateIndex[dateSTR[[#]]] = #) & /@ Range[5000];(*absoluteZero is day 1; convention: % at the end of the day *)
+(revDateIndex[#] = dateSTR[[#]]) & /@ Range[5000];(* this is the reverse date index function *)
+
+(* data set construction *)
+repData = Uncompress[jujuDataJuju]; (* must be replaced when compiling code *)
+{{epsrdb,epsrsd,metadata},{chunks1,chunks2,summUids,summSdates,summSdatesI}} = repData;
+(* reconstruct data sets *)
+(uidWbs[#[[2]]] = #[[1]])&/@epsrsd[[1]];
+{levelSummSetsWBS,rs,ts} = makeDaisyTree[epsrsd];
+(radii[#[[1]]] = #[[2]])&/@rs;(* have to reconstruct radii and tetas as functions of wbs *)
+(tetas[#[[1]]] = #[[2]])&/@ts;
+maxddd = Max[epsrsd[[2,All,1]]];
+(uidI[summUids[[#]]] = #)&/@Range[Length@summUids];
+epsrRepsList = Select[Flatten[{"All",Union[epsrdb[[All,epsrLoc["att1"]]]]}],#!=""&];
+
+(* SC and predictor plot stuff *)
+epsrSCPlotRaster = Graphics[{LightYellow,Rectangle[{0,0},{650,400}]}];
+epsrPredictorData = {Table[{},{4}],{}};
