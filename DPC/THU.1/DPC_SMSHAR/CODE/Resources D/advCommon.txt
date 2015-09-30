@@ -1,0 +1,15 @@
+Common Causes of problems are:
+
+1/ Resources count too low
+2/ Quality of the resources not of requested level
+3/ Productivity of the resources too low
+	
+This can be caused by:
+		
+a/ bad information flow
+b/ bad logistics
+c/ bad team structure
+d/ bad leadership
+			
+Check the causes and correct when needed in the sequence
+1-2-3 -> a-b-c-d

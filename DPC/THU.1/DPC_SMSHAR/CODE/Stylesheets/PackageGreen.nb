@@ -1,0 +1,372 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[     10991,        371]
+NotebookOptionsPosition[      8175,        308]
+NotebookOutlinePosition[      8641,        326]
+CellTagsIndexPosition[      8598,        323]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[StyleData[StyleDefinitions -> "Default.nb"]],
+
+Cell[StyleData["Title"],
+ CellFrame->{{0, 0}, {0.5, 0.5}},
+ CellFrameColor->RGBColor[0.4, 0.8, 0.6],
+ TextAlignment->Left,
+ TextJustification->0.,
+ FontFamily->"Gill Sans",
+ FontSize->24,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0.4, 0.2],
+ Background->RGBColor[0.88, 1, 0.88]],
+
+Cell[StyleData["Subtitle"],
+ TextAlignment->Center,
+ TextJustification->0.,
+ FontFamily->"Verdana",
+ FontSize->14,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Subsubtitle"],
+ TextAlignment->Left,
+ TextJustification->0.,
+ FontFamily->"Verdana Italic",
+ FontSize->10,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0., 0.5019607843137255]],
+
+Cell[StyleData["Section"],
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellFrameColor->RGBColor[0, 0.4, 0.2],
+ FontFamily->"Verdana Bold",
+ FontSize->14,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0.4, 0.2]],
+
+Cell[StyleData["Subsection"],
+ CellFrame->{{0, 0}, {0, 0}},
+ CellDingbat->"\[FilledSquare]",
+ CellFrameColor->RGBColor[0.2, 0.6, 0.4],
+ FontFamily->"Verdana Bold",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0.4, 0.2]],
+
+Cell[StyleData["Subsubsection"],
+ CellFrame->{{0, 0}, {0, 0}},
+ CellDingbat->"\[EmptySquare]",
+ CellMargins->{{82, 3}, {2, 10}},
+ CellFrameColor->RGBColor[0.2, 0.8, 0.4],
+ FontFamily->"Verdana Bold",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0.4, 0.2]],
+
+Cell[StyleData["Subsubsubsection"],
+ CellDingbat->"\[FilledCircle]",
+ CellMargins->{{110, 3}, {2, 10}},
+ MenuSortingValue->10000,
+ FontFamily->"Tahoma Bold",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[0., 0.4, 0.2]],
+
+Cell[StyleData["Text"],
+ CellMargins->{{110, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745],
+ Background->RGBColor[1., 0.997940032043946, 0.9429770351720455]],
+
+Cell[StyleData["Step"],
+ CellDingbat->"\[FilledDiamond]",
+ CellMargins->{{110, 3}, {4, 4}},
+ MenuSortingValue->10000,
+ FontFamily->"Helvetica",
+ FontSize->14,
+ FontWeight->"Plain",
+ FontSlant->"Italic",
+ FontColor->RGBColor[0., 0.5019607843137255, 1.]],
+
+Cell[StyleData["Code"],
+ CellFrame->{{0, 0}, {0, 0}},
+ CellMargins->{{110, 10}, {7, 7}},
+ CellFrameColor->RGBColor[1, 0.5, 0],
+ FontFamily->"Courier",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745],
+ Background->RGBColor[
+  0.9511558709086747, 0.9511558709086747, 0.9511558709086747]],
+
+Cell[StyleData["Input"],
+ CellMargins->{{110, 10}, {7, 7}},
+ InitializationCell->True,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Bold",
+ FontSlant->"Plain",
+ FontColor->GrayLevel[0]],
+
+Cell[StyleData["Output"],
+ CellFrame->{{0, 0}, {0, 0}},
+ CellMargins->{{138, 10}, {7, 7}},
+ CellFrameColor->GrayLevel[0.8],
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Item"],
+ CellMargins->{{138, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["ItemParagraph"],
+ CellMargins->{{138, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Subitem"],
+ CellMargins->{{167, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["SubitemParagraph"],
+ CellMargins->{{167, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["ItemNumbered"],
+ CellMargins->{{110, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["SubitemNumbered"],
+ CellMargins->{{138, 10}, {7, 7}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["InlineFormula"],
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["DisplayFormula"],
+ CellMargins->{{110, 3}, {4, 4}},
+ TextAlignment->Center,
+ TextJustification->0.,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["DisplayFormulaNumbered"],
+ CellMargins->{{110, 3}, {4, 4}},
+ TextAlignment->Center,
+ TextJustification->0.,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Program"],
+ CellMargins->{{110, 3}, {4, 4}},
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Panel"],
+ CellFrame->1,
+ CellMargins->{{110, 3}, {4, 4}},
+ CellFrameColor->RGBColor[1, 0.4, 0.2],
+ MenuSortingValue->10000,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745],
+ Background->RGBColor[
+  0.9019607843137255, 0.9019607843137255, 0.9019607843137255]],
+
+Cell[StyleData["Warning"],
+ CellFrame->1,
+ CellMargins->{{110, 3}, {4, 4}},
+ CellFrameColor->RGBColor[1, 0, 0],
+ MenuSortingValue->10000,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[StyleData["Bookmark"],
+ CellFrame->1,
+ CellMargins->{{110, 3}, {4, 4}},
+ CellFrameColor->RGBColor[0, 0.67, 0],
+ MenuSortingValue->10000,
+ FontFamily->"American Typewriter",
+ FontSize->14,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ Background->RGBColor[0.5019607843137255, 1., 0.]],
+
+Cell[StyleData["FunctionDescription"],
+ CellFrame->{{0, 0}, {0, 2}},
+ CellMargins->{{110, 3}, {4, 4}},
+ CellFrameColor->RGBColor[1, 0.2, 0],
+ MenuSortingValue->10000,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745],
+ Background->RGBColor[
+  0.9511558709086747, 0.9511558709086747, 0.9511558709086747]],
+
+Cell[StyleData["FunctionComment"],
+ CellFrame->0.5,
+ CellMargins->{{110, 3}, {4, 4}},
+ CellFrameColor->GrayLevel[0.5],
+ MenuSortingValue->10000,
+ FontFamily->"Verdana",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Figure"],
+ TextAlignment->Center,
+ TextJustification->0.,
+ MenuSortingValue->10000,
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]],
+
+Cell[StyleData["Figure Caption"],
+ TextAlignment->Center,
+ TextJustification->0.,
+ MenuSortingValue->10000,
+ FontFamily->"Times New Roman Italic",
+ FontSize->12,
+ FontWeight->"Plain",
+ FontSlant->"Plain",
+ FontColor->RGBColor[
+  0.2980392156862745, 0.2980392156862745, 0.2980392156862745]]
+},
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{695, 897},
+WindowMargins->{{309, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, \
+2015)",
+StyleDefinitions->"PrivateStylesheetFormatting.nb",
+PrivateNotebookOptions -> {"NotebookAuthor" -> ""}
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 49, 0, 36, 49, 0, "StyleData", "StyleDefinitions", ""],
+Cell[452, 15, 304, 10, 101, 24, 0, "StyleData", "Title", "All"],
+Cell[759, 27, 242, 8, 55, 27, 0, "StyleData", "Subtitle", "All"],
+Cell[1004, 37, 215, 7, 38, 30, 0, "StyleData", "Subsubtitle", "All"],
+Cell[1222, 46, 221, 7, 63, 26, 0, "StyleData", "Section", "All"],
+Cell[1446, 55, 257, 8, 42, 29, 0, "StyleData", "Subsection", "All"],
+Cell[1706, 65, 293, 9, 36, 32, 0, "StyleData", "Subsubsection", "All"],
+Cell[2002, 76, 251, 8, 36, 35, 0, "StyleData", "Subsubsubsection", "All",
+ MenuSortingValue->10000],
+Cell[2256, 86, 291, 8, 58, 23, 0, "StyleData", "Text", "All"],
+Cell[2550, 96, 252, 8, 38, 23, 0, "StyleData", "Step", "All",
+ MenuSortingValue->10000],
+Cell[2805, 106, 379, 11, 58, 23, 0, "StyleData", "Code", "All"],
+Cell[3187, 119, 193, 7, 45, 24, 0, "StyleData", "Input", "All"],
+Cell[3383, 128, 290, 9, 45, 25, 0, "StyleData", "Output", "All"],
+Cell[3676, 139, 225, 7, 45, 23, 0, "StyleData", "Item", "All"],
+Cell[3904, 148, 234, 7, 45, 32, 0, "StyleData", "ItemParagraph", "All"],
+Cell[4141, 157, 228, 7, 42, 26, 0, "StyleData", "Subitem", "All"],
+Cell[4372, 166, 237, 7, 42, 35, 0, "StyleData", "SubitemParagraph", "All"],
+Cell[4612, 175, 233, 7, 45, 31, 0, "StyleData", "ItemNumbered", "All"],
+Cell[4848, 184, 236, 7, 42, 34, 0, "StyleData", "SubitemNumbered", "All"],
+Cell[5087, 193, 199, 6, 39, 32, 0, "StyleData", "InlineFormula", "All"],
+Cell[5289, 201, 282, 9, 39, 33, 0, "StyleData", "DisplayFormula", "All"],
+Cell[5574, 212, 290, 9, 39, 41, 0, "StyleData", "DisplayFormulaNumbered", \
+"All"],
+Cell[5867, 223, 145, 3, 53, 26, 0, "StyleData", "Program", "All"],
+Cell[6015, 228, 392, 12, 57, 24, 0, "StyleData", "Panel", "All",
+ MenuSortingValue->10000],
+Cell[6410, 242, 257, 9, 57, 26, 0, "StyleData", "Warning", "All",
+ MenuSortingValue->10000],
+Cell[6670, 253, 286, 9, 58, 27, 0, "StyleData", "Bookmark", "All",
+ MenuSortingValue->10000],
+Cell[6959, 264, 419, 12, 57, 38, 0, "StyleData", "FunctionDescription", "All",
+ 
+ MenuSortingValue->10000],
+Cell[7381, 278, 311, 10, 55, 34, 0, "StyleData", "FunctionComment", "All",
+ MenuSortingValue->10000],
+Cell[7695, 290, 184, 5, 35, 25, 0, "StyleData", "Figure", "All",
+ MenuSortingValue->10000],
+Cell[7882, 297, 289, 9, 37, 33, 0, "StyleData", "Figure Caption", "All",
+ MenuSortingValue->10000]
+}
+]
+*)
+
